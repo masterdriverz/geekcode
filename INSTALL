@@ -1,0 +1,33 @@
+Geek Code Generator v1.7.3 - Generates your geek code
+Copyright (C) 1999-2003 Chris Gushue <chris@blackplasma.net>
+
+-----------------------------------------------------------------------
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+-----------------------------------------------------------------------
+
+   Installing should be rather simple, just type 'make' in the
+   source directory. This should also work on DOS with DJGPP v2.
+   If not, just type 'gcc -O3 -s -o geekcode.exe *.c'
+
+-----------------------------------------------------------------------
+The Geek Code is copyright (C) 1993, 1994, 1995, 1996 by Robert A.
+Hayden. All rights reserved. You are free to distribute this code in
+electronic format provided that the file remains unmodified and this
+copyright notice remains attached. This copyright prohibits HTMLizing
+the code for publication on the web. If you wish to publish abstracts
+or portions of the code, contact the author for permission. If you
+wish to write an article about the Geek Code, please contact the
+author. All creatures not native to Earth are exempt from this
+copyright, however, they must prove that they qualify.

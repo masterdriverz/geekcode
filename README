@@ -1,0 +1,92 @@
+Geek Code Generator v1.7.3 - Generates your geek code
+Copyright (C) 1999-2003 Chris Gushue <chris@blackplasma.net>
+
+-----------------------------------------------------------------------
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+-----------------------------------------------------------------------
+
+This program will generate a geek code block for you by simply
+choosing which codes suit you from the screen. I am not a very good
+programmer, I just dabble a little every now and then.
+
+Originally, I started this project in Visual Basic, but decided to use
+DJGPP v2 instead, partially because it is free, partially because it is
+more portable and partially because Visual Basic sucks :) Since then, I
+have totally switched my system to Linux. Currently, my system is
+Slackware 4.0 (partially) converted to glibc 2.1.1, but I will be
+installing Debian 2.1 very soon.
+
+To use this program, you just run the resulting binary and follow
+the directions. Everything SHOULD work, but I haven't tested it
+all that much.
+
+If you have any bugs, patches, typos, comments, flames, money, 
+postcards, or any other free stuff - feel free to email me
+at chris@blackplasma.net - also, please let me know if you modify 
+this source, so I can try it myself.
+
+-----------------------------------------------------------------------
+
+Linux notes:
+
+This program was developed using gcc 2.95.1, glibc 2.1.2, and various
+other GNU tools, on Debian GNU/Linux (potato), with the 2.2.12 kernel.
+
+To install on Linux (and most likely other UNIX variants):
+
+    make
+
+-----------------------------------------------------------------------
+
+DOS notes:
+
+DJGPP v2 is available at http://www.delorie.com/djgpp/ including
+CWSDPMI, which is also released under the GPL. This executable is
+required if your OS doesn't provide DPMI services (Windows 9x does).
+You have the right to receive the source for CWSDPMI, as well as any
+binary updates. These things should also be available at the site
+listed above for DJGPP.
+
+To compile on DOS with DJGPP v2, try this:
+
+	gcc -O3 -s -o geekcode.exe *.c
+
+Also, if you have the DJGPP make package instaled, you can probably
+just type make, and ignore any errors you might get (at least, I could
+do that in my limited testing on my other system).
+
+-----------------------------------------------------------------------
+
+Relevant references:
+--------------------
+http://www.geekcode.com  - Geek Code website
+http://www.gnu.org       - GNU Project and FSF (Free Software Foundation)
+http://www.delorie.com   - Home of the DJGPP compiler
+http://www.debian.org    - Debian GNU/Linux (the distribution I use)
+http://www.slashdot.org  - Geek site extraordinaire
+http://www.freshmeat.net - Ultimate Linux software database
+http://www.mutt.org      - The best email client
+http://www.vim.org       - A nice editor, I recently started using it
+
+-----------------------------------------------------------------------
+The Geek Code is copyright (C) 1993, 1994, 1995, 1996 by Robert A.
+Hayden. All rights reserved. You are free to distribute this code in
+electronic format provided that the file remains unmodified and this
+copyright notice remains attached. This copyright prohibits HTMLizing
+the code for publication on the web. If you wish to publish abstracts
+or portions of the code, contact the author for permission. If you
+wish to write an article about the Geek Code, please contact the
+author. All creatures not native to Earth are exempt from this
+copyright, however, they must prove that they qualify.
