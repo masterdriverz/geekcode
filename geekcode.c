@@ -272,7 +272,16 @@ void output_answers(FILE *out)
 	}
 }
 
-static char usage_str[] = "./geekcode [ --read || --write || --output ] <file>\n";
+static char usage_str[] = "\
+./geekcode [ --read || --write || --output ] <file>\n\
+  --read\n\
+     Translate a geekcode file (reads from stdin if no files given).\n\
+  --write\n\
+     Interactively input a geekcode (default).\n\
+  --output <file>\n\
+     (Only applicable with --write.)\n\
+     Write the final geekcode to file (but still write the questions to stdout).\n\
+";
 
 inline void usage(FILE *out)
 {
@@ -331,11 +340,6 @@ int main(int argc, char **argv)
 	if (help) {
 		usage(stdout);
 		return 0;
-	}
-	if (!read && !write) {
-		fprintf(stderr, "Need an action (--read or --write).\n");
-		usage(stderr);
-		return -1;
 	}
 	if (output && read) {
 		fprintf(stderr, "It only makes sense to use --output with --write.\n");
