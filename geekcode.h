@@ -22,12 +22,9 @@
 #ifndef __INCLUDED_GEEKCODE_H__
 #define __INCLUDED_GEEKCODE_H__
 
-
-#define VERSION "1.7.3" /* Added in v1.2 */
-
 #include <stdlib.h>
-#define SENTINEL {0, NULL, NULL}
 
+#define VERSION "1.7.3"
 #define PAGES 36
 #define MAX_LINES 21
 
@@ -43,23 +40,6 @@ struct stuff2 {
 	int dependant;
 };
 
-char *getalias(struct stuff2 *obj);
-char *getcomment(struct stuff2 *obj);
-
-#define eof_error() do {		\
-	fprintf(stderr,			\
-"\n\nGot EOF on stdin, aborting...\n");	\
-	exit(1);			\
-} while (0);
-
-int getanswer(char *name, int page_num, struct stuff *objects, char *additional);
-
-void show_geekcode(int x);                /* Modified in v1.2 */
-void write_geekcode(int x);		  /* Added in v1.7 */
-
-void clear_kb(void);                      /* Added in v1.3 */
-
-/* Console I/O - gc_consoleio.c */
-void clearscreen(void);
+#define SENTINEL {0, NULL, NULL}
 
 #endif /* __INCLUDED_GEEKCODE_H__ */
