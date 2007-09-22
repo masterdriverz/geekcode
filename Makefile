@@ -1,6 +1,7 @@
 CFLAGS += -Wall
 TARGET  = geekcode
 CC     ?= gcc
+PREFIX ?= /usr/local
 
 LIBFILES = gc_appearance.o    \
            gc_computers.o     \
@@ -24,4 +25,4 @@ geekcode: $(LIBFILES)
 	$(CC) $(LDFLAGS) -o $(TARGET) $(LIBFILES)
 
 install:
-	install -m 755 geekcode /usr/local/bin
+	install -m 755 geekcode $(PREFIX)/bin
