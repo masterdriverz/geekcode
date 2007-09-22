@@ -239,7 +239,7 @@ void output_code(FILE *out)
 				}
 				fprintf(out, content->alias, *aux->alias);
 			} else {
-				fprintf(out, "%s", s);
+				fputs(content->alias, out);
 			}
 			fprintf(out, " ");
 end:
