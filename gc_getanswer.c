@@ -74,7 +74,7 @@ int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
 
 	free(spaces);
 	if (selection == 0)
-		exit(1);
+		exit(0);
 	else
 		return selection;
 }
