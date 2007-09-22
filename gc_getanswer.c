@@ -29,11 +29,11 @@ static char *make_spaces(int amount)
 
 int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
 {
-	int selection=99, num_count, i, line_count, c, overflowed=0;
+	int selection, line_count;
 	char *spaces=make_spaces(66-strlen(name));
 
 	do {
-		num_count = MAX_LINES;
+		int i, num_count=MAX_LINES, overflowed=0;
 		line_count = 0;
 		clearscreen();
 
@@ -66,13 +66,11 @@ int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
 			while (num_count-- > 0)
 				printf("\n");
 		printf("Enter your %s code number here [0 to quit]: ", name);
-		c = scanf("%d", &selection);
-
-		if (c == EOF)
+		if (scanf("%d", &selection) == EOF)
 			eof_error();
 
 		clear_kb();
-	} while (selection < 0 || selection > line_count || c != 1);
+	} while (selection < 0 || selection > line_count);
 
 	free(spaces);
 	if (selection == 0)
