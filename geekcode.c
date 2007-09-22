@@ -47,6 +47,10 @@
 } while (0);
 
 
+/*
+ * Parses the contents of data into line.
+ * Returns 0 on success, -1 on failure, and sets errno appropriately.
+ */
 int process_line(struct stuff2 *line, char *data)
 {
 	char *last, *p;
@@ -96,6 +100,10 @@ found:
 	return 0;
 }
 
+/*
+ * Reads geekcode from in and initialises the structures in lines
+ * appropriately. Returns 0 on success, -1 on failure
+ */
 int read_code(FILE *in)
 {
 	char data[1024];
