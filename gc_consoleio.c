@@ -24,7 +24,7 @@
 void clear_kb(void)
 {
    char junk[80];
-   fgets(junk, 80, stdin); /* Changed to fgets() in v1.4 - is this a good way to use it? */
+   fgets(junk, sizeof(junk), stdin);
 }
 
 #ifndef _WIN32
