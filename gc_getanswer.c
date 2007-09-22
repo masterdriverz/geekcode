@@ -2,7 +2,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "geekcode.h"
+#include "gc_getanswer.h"
+#include "gc_consoleio.h"
 
 /* Return the amount of character c's in s */
 static int count(char *s, char c)
