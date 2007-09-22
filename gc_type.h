@@ -3,6 +3,6 @@
 
 #include "geekcode.h"
 
-extern struct stuff type[];
+extern struct stuff gc_type[];
 
 #endif

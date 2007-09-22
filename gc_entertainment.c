@@ -1,6 +1,6 @@
 #include "geekcode.h"
 
-const struct stuff startrek[] = {
+const struct stuff gc_startrek[] = {
 	{1, "t+++",	"It's not just a TV show, it's a religion. I know all about warp field\n"
 			"       dynamics and the principles behind the transporter. I have memorized the\n"
 			"       TECH manual. I speak Klingon. I go to cons with Vulcan ears on.\n"
@@ -24,7 +24,7 @@ const struct stuff startrek[] = {
 	SENTINEL
 };
 
-const struct stuff babylon5[] = {
+const struct stuff gc_babylon5[] = {
 	{1, "5++++",	"I am J. Michael Straczynski"},
 	{2, "5+++",	"I am a True Worshipper of the Church of Joe who lives eats breathes and\n"
 			"        thinks Babylon 5, and has Evil thoughts about staling Joe's videotape\n"
@@ -46,7 +46,7 @@ const struct stuff babylon5[] = {
 	SENTINEL
 };
 
-const struct stuff xfiles[] = {
+const struct stuff gc_xfiles[] = {
 	{1, "X++++",	"I am Chris Carter"},
 	{2, "X+++",	"This is the BEST show on TV, and it's about time. I've seen everything\n"
 			"        from David Duchovny and Gillian Anderson have ever done that has been\n"
@@ -66,7 +66,7 @@ const struct stuff xfiles[] = {
 	SENTINEL
 };
 
-const struct stuff rp[] = {
+const struct stuff gc_rp[] = {
 	{1, "R+++",	"I've written and published my own gaming materials."},
 	{2, "R++",	"There is no life outside the roll of the die. I know all the piddly\n"
 			"       rules of (chosen game). _MY_ own warped rules scare the rest of the\n"
@@ -81,7 +81,7 @@ const struct stuff rp[] = {
 	SENTINEL
 };
 
-const struct stuff television[] = {
+const struct stuff gc_television[] = {
 	{1, "tv+++",	"There's nothing I can experience 'out there' that I can't see coming\n"
 			"        over my satellite dish. I wish there were MORE channels. I live for the\n"
 			"        O.J. Trial."},
@@ -96,7 +96,7 @@ const struct stuff television[] = {
 };
 
 
-const struct stuff books[] = {
+const struct stuff gc_books[] = {
 	{1, "b++++",	"I read a book a day. I have library cards in three states. I have\n"
 			"        discount cards from every major bookstore. I've ordered books from\n"
 			"        another country to get my Favorite Author Fix."},
@@ -109,7 +109,7 @@ const struct stuff books[] = {
 	SENTINEL
 };
 
-const struct stuff dilbert[] = {
+const struct stuff gc_dilbert[] = {
 	{1, "DI+++++",	"I am Scott Adams"},
 	{2, "DI++++",	"I've received mail from Scott Adams. i'm in the DNRC (Dogbert's New\n"
 			"          Ruling Class)"},
@@ -124,7 +124,7 @@ const struct stuff dilbert[] = {
 	SENTINEL
 };
 
-const struct stuff doom[] = {
+const struct stuff gc_doom[] = {
 	{1, "D++++",	"I work for iD software."},
 	{2, "D+++",	"I crank out PWAD files daily, complete with new monsters, weaponry,\n"
 			"        sounds, and maps. I'm a Doom god. I can solve the original maps in\n"
@@ -141,7 +141,7 @@ const struct stuff doom[] = {
 	SENTINEL
 };
 
-const struct stuff geekcode[] = {
+const struct stuff gc_geekcode[] = {
 	{1, "G+++++",	"I am Robert Hayden"},
 	{2, "G++++",	"I have made a suggestion for future versions of the code (note that\n"
 			"         making a suggestion just to get a G++++ rating doesn't count, you also\n"

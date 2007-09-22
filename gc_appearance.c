@@ -1,6 +1,6 @@
 #include "geekcode.h"
 
-const struct stuff dress[] = {
+const struct stuff gc_dress[] = {
 	{1, "d++",	"I tend to wear conservative dress such as a business suit or\n"
 			"        worse, a tie."},
 	{2, "d+",	"Good leisure-wear. Slacks, button-shirt, etc. No jeans, tennis\n"
@@ -20,7 +20,7 @@ const struct stuff dress[] = {
 	SENTINEL
 };
 
-const struct stuff height[] = {
+const struct stuff gc_height[] = {
 	{1, "s+++",	"I usually have to duck through doors."},
 	{2, "s++",	"I'm a basketball candidate."},
 	{3, "s+",	"I'm a little taller than most."},
@@ -31,7 +31,7 @@ const struct stuff height[] = {
 	SENTINEL
 };
 
-const struct stuff weight[] = {
+const struct stuff gc_weight[] = {
 	{1, "s+++",	"I take up three movie seats."},
 	{2, "s++",	"I'm a linebacker candidate."},
 	{3, "s+",	"I'm a little rounder than most."},
@@ -42,7 +42,7 @@ const struct stuff weight[] = {
 	SENTINEL
 };
 
-const struct stuff age[] = {
+const struct stuff gc_age[] = {
 	{1, "a+++",	"60 and up"},
 	{2, "a++",	"50-59"},
 	{3, "a+",	"40-49"},

@@ -1,6 +1,6 @@
 #include "geekcode.h"
 
-const struct stuff social[] = {
+const struct stuff gc_social[] = {
 	{1, "PS+++",	"Legalize drugs! Abolish the government! 'Fuck the draft!'"},
 	{2, "PS++",	"I give to liberal causes. I march for gay rights. I'm a card carrying\n"
 			"        member of the ACLU. Keep abortion safe and legal."},
@@ -17,7 +17,7 @@ const struct stuff social[] = {
 	SENTINEL
 };
 
-const struct stuff economic[] = {
+const struct stuff gc_economic[] = {
 	{1, "PE+++",	"Abolish antitrust legislation. Raise taxes on everyone but the rich so\n"
 			"        that the money can trickle-down to the masses."},
 	{2, "PE++",	"Keep the government off the backs of businesses. Deregulate as much\n"
@@ -31,7 +31,7 @@ const struct stuff economic[] = {
 	SENTINEL
 };
 
-const struct stuff cypher[] = {
+const struct stuff gc_cypher[] = {
 	{1, "Y+++",	"I am T.C. May"},
 	{2, "Y++",	"I am on the cypherpunks mailing list and active around Usenet. I never\n"
 			"       an opportunity to talk about the evils of Clipper and ITAR and the NSA.\n"
@@ -49,7 +49,7 @@ const struct stuff cypher[] = {
 	SENTINEL
 };
 
-const struct stuff pgp[] = {
+const struct stuff gc_pgp[] = {
 	{1, "PGP++++",	"I am Philip Zimmerman."},
 	{2, "PGP+++",	"I don't send or answer mail that is not encrypted, or at the very\n"
 			"          least, signed. If you are reading this without decrypting it first,\n"

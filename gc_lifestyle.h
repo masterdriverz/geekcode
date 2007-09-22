@@ -3,10 +3,10 @@
 
 #include "geekcode.h"
 
-extern struct stuff education[];
-extern struct stuff housing[];
-extern struct stuff relationships[];
-extern struct stuff gender[];
-extern struct stuff sex[];
+extern struct stuff gc_education[];
+extern struct stuff gc_housing[];
+extern struct stuff gc_relationships[];
+extern struct stuff gc_gender[];
+extern struct stuff gc_sex[];
 
 #endif

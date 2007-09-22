@@ -1,6 +1,6 @@
 #include "geekcode.h"
 
-const struct stuff type[] = {
+const struct stuff gc_type[] = {
 	{1, "GB",	"Geek of Business"},
 	{2, "GC",	"Geek of Classics"},
 	{3, "GCA",	"Geek of Commercial Arts"},

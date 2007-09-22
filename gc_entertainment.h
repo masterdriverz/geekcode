@@ -3,14 +3,14 @@
 
 #include "geekcode.h"
 
-extern struct stuff startrek[];
-extern struct stuff babylon5[];
-extern struct stuff xfiles[];
-extern struct stuff rp[];
-extern struct stuff television[];
-extern struct stuff books[];
-extern struct stuff dilbert[];
-extern struct stuff doom[];
-extern struct stuff geekcode[];
+extern struct stuff gc_startrek[];
+extern struct stuff gc_babylon5[];
+extern struct stuff gc_xfiles[];
+extern struct stuff gc_rp[];
+extern struct stuff gc_television[];
+extern struct stuff gc_books[];
+extern struct stuff gc_dilbert[];
+extern struct stuff gc_doom[];
+extern struct stuff gc_geekcode[];
 
 #endif

@@ -3,9 +3,9 @@
 
 #include "geekcode.h"
 
-extern struct stuff social[];
-extern struct stuff economic[];
-extern struct stuff cypher[];
-extern struct stuff pgp[];
+extern struct stuff gc_social[];
+extern struct stuff gc_economic[];
+extern struct stuff gc_cypher[];
+extern struct stuff gc_pgp[];
 
 #endif

@@ -1,6 +1,6 @@
 #include "geekcode.h"
 
-const struct stuff education[] = {
+const struct stuff gc_education[] = {
 	{1, "e+++++",	"I am Stephen Hawking"},
 	{2, "e++++",	"Managed to get my Ph.D."},
 	{3, "e+++",	"Got a Master degree"},
@@ -14,7 +14,7 @@ const struct stuff education[] = {
 	SENTINEL
 };
 
-const struct stuff housing[] = {
+const struct stuff gc_housing[] = {
 	{1, "h++",	"Living in a cave with 47 computers and an Internet feed, located near a\n"
 			"        Dominoes pizza (See !d)"},
 	{2, "h+",	"Living alone, get out once a week to buy food, no more than once a\n"
@@ -33,7 +33,7 @@ const struct stuff housing[] = {
 	SENTINEL
 };
 
-const struct stuff relationships[] = {
+const struct stuff gc_relationships[] = {
 	{1, "r+++",	"Found someone, dated, and am now married."},
 	{2, "r++",	"I've dated my current S.O. for a long time."},
 	{3, "r+",	"I date frequently, bouncing from one relationship to another."},
@@ -50,14 +50,14 @@ const struct stuff relationships[] = {
 	SENTINEL
 };
 
-const struct stuff gender[] = {
+const struct stuff gc_gender[] = {
 	{1, "x",	"I am a female"},
 	{2, "y",	"I am a male"},
 	{3, "z",	"I do not wish to disclose my gender"},
 	SENTINEL
 };
 
-const struct stuff sex[] = {
+const struct stuff gc_sex[] = {
 	{1, "%c+++++",	"I am Madonna"},
 	{2, "%c++++",	"I have a few little rug rats to prove I've been there. Besides, with\n"
 			"          kids around, who has time for sex?"},

@@ -1,6 +1,6 @@
 #include "geekcode.h"
 
-const struct stuff computers[] = {
+const struct stuff gc_computers[] = {
 	{1, "C++++",	"I'll be the first in line to get the new cybernetic interface installed\n"
 			"        into my skull."},
 	{2, "C+++",	"You mean there is life outside of Internet? You're shittin' me!\n"
@@ -20,7 +20,7 @@ const struct stuff computers[] = {
 	SENTINEL
 };
 
-const struct stuff unix_type[] = {
+const struct stuff gc_unix_type[] = {
 	{1, "B",	"BSD (use unless your BSDish system is mentioned below)"},
 	{2, "L",	"GNU/Linux"},
 	{3, "U",	"Ultrix"},
@@ -38,7 +38,7 @@ const struct stuff unix_type[] = {
 
 #define foo unix
 #undef unix
-const struct stuff unix[] = {
+const struct stuff gc_unix[] = {
 	{1, "U%c++++",	"I am the sysadmin. If you try and crack my machine don't be surprised\n"
 			"         if the municipal works department gets an \"accidental\" computer\n"
 			"         generated order to start a new landfill on your front lawn or your\n"
@@ -58,10 +58,8 @@ const struct stuff unix[] = {
 	{8, "U%c---",	"Unix geeks are actually nerds in disguise."},
 	SENTINEL
 };
-#define unix foo
-#undef foo
 
-const struct stuff perl[] = {
+const struct stuff gc_perl[] = {
 	{1, "P+++++",	"I am Larry Wall, Tom Christiansen, or Randal Schwartz."},
 	{2, "P++++",	"I don't write Perl, I speak it. Perl has superseded all other\n"
 			"          programming languages. I firmly believe that all programs can be\n"
@@ -83,9 +81,7 @@ const struct stuff perl[] = {
 	SENTINEL
 };
 
-#define foo linux
-#undef linux
-const struct stuff linux[] = {
+const struct stuff gc_linux[] = {
 	{1, "L+++++",	"I am Linus, grovel before me."},
 	{2, "L++++",	"I am a Linux wizard. I munch C code for breakfast and have enough room\n"
 			"         left over for kernel debugging. I have so many patches installed that\n"
@@ -106,11 +102,8 @@ const struct stuff linux[] = {
 	{9, "L---",	"I am Bill Gates."},
 	SENTINEL
 };
-#define linux foo
-#undef foo
 
-
-const struct stuff emacs[] = {
+const struct stuff gc_emacs[] = {
 	{1, "E+++",	"Emacs is my login shell! M-x doctor is my psychologist! I use Emacs to\n"
 			"        control my TV and toaster oven! All you vi people don't know what you\n"
 			"        are missing! I read alt.religion.emacs, alt.sex.emacs and comp.os.emacs"},
@@ -124,7 +117,7 @@ const struct stuff emacs[] = {
 	SENTINEL
 };
 
-const struct stuff www[] = {
+const struct stuff gc_www[] = {
 	{1, "W+++",	"I am a WebMaster. Don't even think about trying to view my page without\n"
 			"       the latest version of Netscape. When I'm not on my normal net connection\n"
 			"       I surf the web using my Newton and a cellular modem."},
@@ -142,7 +135,7 @@ const struct stuff www[] = {
 };
 
 
-const struct stuff usenet[] = {
+const struct stuff gc_usenet[] = {
 	{1, "N++++",	"I am Tim Pierce."},
 	{2, "N+++",	"I read so many newsgroups that the next batch of news comes in before\n"
 			"         I finish reading the last batch, and I have to read for about 2 hours\n"
@@ -159,7 +152,7 @@ const struct stuff usenet[] = {
 	SENTINEL
 };
 
-const struct stuff oracle[] = {
+const struct stuff gc_oracle[] = {
 	{1, "o+++++",	"I am Steve Kinzler."},
 	{2, "o++++",	"I am an active Priest."},
 	{3, "o+++",	"I was a Priest, but have retired."},
@@ -171,7 +164,7 @@ const struct stuff oracle[] = {
 	SENTINEL
 };
 
-const struct stuff kibo[] = {
+const struct stuff gc_kibo[] = {
 	{1, "K++++++",	"I am Kibo."},
 	{2, "K+++++",	"I've had sex with Kibo."},
 	{3, "K++++",	"I've met Kibo."},
@@ -188,7 +181,7 @@ const struct stuff kibo[] = {
 	SENTINEL
 };
 
-const struct stuff windows[] = {
+const struct stuff gc_windows[] = {
 	{1, "w+++++",	"I am Bill Gates."},
 	{2, "w++++",	"I have Windows, Windows 95, Windows NT, and Windows MT Advanced Server\n"
 			"         all running on my SMP RISC machine. I haven't seen daylight in months."},
@@ -212,7 +205,7 @@ const struct stuff windows[] = {
 	SENTINEL
 };
 
-const struct stuff os2[] = {
+const struct stuff gc_os2[] = {
 	{1, "O+++",	"I live, eat and breathe OS/2. All of my hard drives are HPFS.\n"
 			"        I am the Anti-Gates."},
 	{2, "O++",	"I use OS/2 for all my computing needs. I use some DOS and Windows\n"
@@ -228,7 +221,7 @@ const struct stuff os2[] = {
 	SENTINEL
 };
 
-const struct stuff mac[] = {
+const struct stuff gc_mac[] = {
 	{1, "M++",	"I am a Mac guru. Anything those DOS putzes and Unix nerds can do, I can\n"
 			"      do better, and if not, I'll write the damn software to do it."},
 	{2, "M+",	"A Mac has it's uses and I use it quite often."},
@@ -240,7 +233,7 @@ const struct stuff mac[] = {
 	SENTINEL
 };
 
-const struct stuff vms[] = {
+const struct stuff gc_vms[] = {
 	{1, "V+++",	"I am a VMS sysadmin. I wield far more power than those Unix admins,\n"
 			"       because Unix can be found on any dweeb's desktop. Power through\n"
 			"       obscurity is my motto."},

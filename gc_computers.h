@@ -3,28 +3,20 @@
 
 #include "geekcode.h"
 
-extern struct stuff computers[];
-extern struct stuff unix_type[];
-#define foo unix
-#undef unix
-extern struct stuff unix[];
-#define unix foo
-#undef foo
-extern struct stuff computers[];
-extern struct stuff perl[];
-#define foo linux
-#undef linux
-extern struct stuff linux[];
-#define linux foo
-#undef foo
-extern struct stuff emacs[];
-extern struct stuff www[];
-extern struct stuff usenet[];
-extern struct stuff oracle[];
-extern struct stuff kibo[];
-extern struct stuff windows[];
-extern struct stuff os2[];
-extern struct stuff mac[];
-extern struct stuff vms[];
+extern struct stuff gc_computers[];
+extern struct stuff gc_unix_type[];
+extern struct stuff gc_unix[];
+extern struct stuff gc_computers[];
+extern struct stuff gc_perl[];
+extern struct stuff gc_linux[];
+extern struct stuff gc_emacs[];
+extern struct stuff gc_www[];
+extern struct stuff gc_usenet[];
+extern struct stuff gc_oracle[];
+extern struct stuff gc_kibo[];
+extern struct stuff gc_windows[];
+extern struct stuff gc_os2[];
+extern struct stuff gc_mac[];
+extern struct stuff gc_vms[];
 
 #endif

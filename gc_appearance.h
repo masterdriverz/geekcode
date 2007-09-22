@@ -3,9 +3,9 @@
 
 #include "geekcode.h"
 
-extern struct stuff dress[];
-extern struct stuff height[];
-extern struct stuff weight[];
-extern struct stuff age[];
+extern struct stuff gc_dress[];
+extern struct stuff gc_height[];
+extern struct stuff gc_weight[];
+extern struct stuff gc_age[];
 
 #endif
