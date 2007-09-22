@@ -11,6 +11,7 @@ LIBFILES = gc_appearance.o    \
            gc_type.o          \
            gc_consoleio.o     \
            gc_getanswer.o     \
+           gc_lines.o         \
            geekcode.o
 
 all: $(TARGET)
