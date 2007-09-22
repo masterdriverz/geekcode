@@ -42,9 +42,14 @@ int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
 		for (i=0; objects[i].num; i++) {
 			char *s=objects[i].alias;
 			if (!num_count) {
-				printf("Press any key to continue: ");
-				if (getchar() == EOF)
-					eof_error();
+				int c;
+				printf("Press enter to continue: ");
+				while (c = getchar()) {
+					if (c == EOF)
+						eof_error();
+					if (c == '\n')
+						break;
+				}
 				num_count = MAX_LINES;
 				overflowed = 1;
 			}
