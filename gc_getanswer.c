@@ -8,11 +8,9 @@
 static int count(char *s, char c)
 {
 	int i=0;
-	while (*s) {
+	for (; *s; s++)
 		if (*s == c)
 			i++;
-		s++;
-	}
 	return i;
 }
 
