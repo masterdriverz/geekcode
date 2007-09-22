@@ -42,9 +42,9 @@ int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
 		for (i=0; objects[i].num; i++) {
 			char *s=objects[i].alias;
 			if (!num_count) {
-				int c;
 				printf("Press enter to continue: ");
-				while (c = getchar()) {
+				while (1) {
+					int c = getchar();
 					if (c == EOF)
 						eof_error();
 					if (c == '\n')
