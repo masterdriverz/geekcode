@@ -38,7 +38,7 @@ int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
 		clearscreen();
 
 		printf("%s%sPage %2i of %i\n", name, spaces, PAGES-(PAGES-page_num), PAGES);
-		printf("===============================================================================\n");
+		puts("===============================================================================");
 		for (i=0; objects[i].num; i++) {
 			char *s=objects[i].alias;
 			if (!num_count) {
