@@ -113,7 +113,7 @@ int read_code(FILE *in)
 		if (strcmp(data, "-----BEGIN GEEK CODE BLOCK-----\n"))
 			continue;
 		/* Skip version line */
-		if (!fgets(data, 1024, in))
+		if (!fgets(data, sizeof(data), in))
 			return -1;
 		goto next_loop;
 	}
