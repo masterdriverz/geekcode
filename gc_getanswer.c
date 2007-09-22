@@ -79,7 +79,7 @@ int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
 		return selection;
 }
 
-char *getalias(struct stuff2 *obj)
+struct stuff *getcontent(struct stuff2 *obj)
 {
 	struct stuff *temp=obj->contents;
 	if (!obj->answer || obj->answer == -1) {
@@ -95,24 +95,5 @@ char *getalias(struct stuff2 *obj)
 	errno = EINVAL;
 	return NULL;
 out:
-	return temp->alias;
-}
-
-char *getcomment(struct stuff2 *obj)
-{
-	struct stuff *temp=obj->contents;
-	if (!obj->answer || obj->answer == -1) {
-		errno = EINVAL;
-		return NULL;
-	}
-	while (temp->num) {
-		if (obj->answer == temp->num)
-			goto out;
-		temp++;
-	}
-	/* We should never get here */
-	errno = EINVAL;
-	return NULL;
-out:
-	return temp->comment;
+	return temp;
 }

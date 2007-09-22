@@ -33,6 +33,7 @@
 #include "gc_lifestyle.h"
 #include "gc_politics.h"
 #include "gc_type.h"
+#include "gc_getanswer.h"
 
 #define HIDDEN(name)			{-1, 0, #name, name, 0},
 #define INDEPENDANT(name)		{-1, 1, #name, name, 0},
@@ -193,10 +194,16 @@ void create_code(void)
 	while (*cur_line) {
 		struct stuff2 *cur_question = *cur_line;
 		while (cur_question->answer) {
-			char *s=NULL;
-			if (cur_question->dependant)
-				s = getalias(cur_question-1);
-			cur_question->answer = getanswer(cur_question->name, page_num, cur_question->contents, s);
+			char *aux_string=NULL;
+			if (cur_question->dependant) {
+				struct stuff *aux = getcontent(cur_question-1);
+				if (!aux) {
+					perror(NULL);
+					exit(1);
+				}
+				aux_string = aux->alias;
+			}
+			cur_question->answer = getanswer(cur_question->name, page_num, cur_question->contents, aux_string);
 			cur_question++;
 			page_num++;
 		}
@@ -215,20 +222,22 @@ void output_code(FILE *out)
 	while (*cur_line) {
 		struct stuff2 *cur_question = *cur_line;
 		while (cur_question->answer) {
-			char *s;
+			struct stuff *content;
 			if (!cur_question->display)
 				goto end;
-			s = getalias(cur_question);
-			if (!s) {
-				printf("\n%s\n", cur_question->name);
-				perror(
-"There was an error getting an alias");
+			content = getcontent(cur_question);
+			if (!content) {
+				fprintf(stderr, "\n%s\n", cur_question->name);
+				perror("There was an error getting an alias");
 				exit(1);
 			}
 			if (cur_question->dependant) {
-				char *alt;
-				alt = getalias(cur_question-1);
-				fprintf(out, s, *alt);
+				struct stuff *aux = getcontent(cur_question-1);
+				if (!aux) {
+					perror(NULL);
+					exit(1);
+				}
+				fprintf(out, content->alias, *aux->alias);
 			} else {
 				fprintf(out, "%s", s);
 			}
@@ -251,13 +260,12 @@ void output_answers(FILE *out)
 	while (*cur_line) {
 		struct stuff2 *cur_question = *cur_line;
 		while (cur_question->answer) {
-			char *s;
-			s = getcomment(cur_question);
-			if (!s) {
+			struct stuff *content = getcontent(cur_question);
+			if (!content) {
 				perror("There was an error getting an answer");
 				exit(1);
 			}
-			fprintf(out, "%s: %s\n", cur_question->name, s);
+			fprintf(out, "%s: %s\n", cur_question->name, content->comment);
 			cur_question++;
 		}
 		cur_line++;
