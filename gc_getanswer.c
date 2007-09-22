@@ -81,19 +81,18 @@ int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
 
 struct stuff *getcontent(struct stuff2 *obj)
 {
-	struct stuff *temp=obj->contents;
+	struct stuff *temp;
+
 	if (!obj->answer || obj->answer == -1) {
 		errno = EINVAL;
 		return NULL;
 	}
-	while (temp->num) {
+
+	for (temp=obj->contents; temp->num; temp++)
 		if (obj->answer == temp->num)
-			goto out;
-		temp++;
-	}
+			return temp;
+
 	/* We should never get here */
 	errno = EINVAL;
 	return NULL;
-out:
-	return temp;
 }
