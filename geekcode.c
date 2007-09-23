@@ -214,7 +214,7 @@ void output_answers(FILE *out)
 	}
 }
 
-static char usage_str[] = "\
+const char usage_str[] = "\
 ./geekcode [ --read || --write || --output ] <file>\n\
   --read\n\
      Translate a geekcode file (reads from stdin if no files given).\n\
