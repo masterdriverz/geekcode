@@ -50,7 +50,7 @@ int process_line(struct stuff2 *line, char *data)
 			line++;
 
 		for (temp = line->contents; temp->alias; temp++) {
-			char buf[256];
+			char *n, buf[256];
 			if (line->dependant) {
 				if (sscanf(p, temp->alias, &c))
 					snprintf(buf, sizeof(buf), temp->alias, c);
@@ -60,6 +60,9 @@ int process_line(struct stuff2 *line, char *data)
 				strncpy(buf, temp->alias, sizeof(buf)-1);
 				buf[sizeof(buf)-1] = '\0';
 			}
+			n = strchr(p, '\n');
+			if (n)
+				*n = '\0';
 			if (!strcmp(buf, p))
 				goto out;
 		}
