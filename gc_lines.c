@@ -1,3 +1,9 @@
+/*
+ * Geek Code Generator v2
+ * Copyright (C) 2007 Charlie Shepherd <masterdriverz@gentoo.org>
+ * License: GPL2
+ */
+
 #include "gc_appearance.h"
 #include "gc_computers.h"
 #include "gc_entertainment.h"

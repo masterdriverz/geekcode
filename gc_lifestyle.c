@@ -1,3 +1,9 @@
+/*
+ * Geek Code Generator v2
+ * Copyright (C) 2007 Charlie Shepherd <masterdriverz@gentoo.org>
+ * License: GPL2
+ */
+
 #include "geekcode.h"
 
 const struct stuff gc_education[] = {

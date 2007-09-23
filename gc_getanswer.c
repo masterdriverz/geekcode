@@ -1,3 +1,10 @@
+/*
+ * Geek Code Generator v2
+ * Copyright (C) 2007 Charlie Shepherd <masterdriverz@gentoo.org>
+ * Based on code by Chris Gushue <chris@blackplasma.net>
+ * License: GPL2
+ */
+
 #include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
