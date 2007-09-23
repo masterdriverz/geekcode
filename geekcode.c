@@ -82,7 +82,7 @@ found:
 			(line-1)->answer = i;
 		}
 	}
-	if (isalnum((unsigned char )*p) || line->answer) {
+	if ((p && isalnum((unsigned char )*p)) || line->answer) {
 		errno = EINVAL;
 		return -1;
 	}
