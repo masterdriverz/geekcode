@@ -128,11 +128,11 @@ next_loop:
 
 void create_code(void)
 {
-	struct stuff2 **cur_line = lines;
+	struct stuff2 **cur_line;
 	int page_num=1;
-	while (*cur_line) {
-		struct stuff2 *cur_question = *cur_line;
-		while (cur_question->answer) {
+	for (cur_line = lines; *cur_line; cur_line++) {
+		struct stuff2 *cur_question;
+		for (cur_question = *cur_line; cur_question->answer; cur_question++, page_num++) {
 			char *aux_string=NULL;
 			if (cur_question->dependant) {
 				struct stuff *aux = getcontent(cur_question-1);
@@ -145,27 +145,24 @@ void create_code(void)
 			cur_question->answer =
 				getanswer(cur_question->name, page_num,
 					cur_question->contents, aux_string);
-			cur_question++;
-			page_num++;
 		}
-		cur_line++;
 	}
 }
 
 
 void output_code(FILE *out)
 {
-	struct stuff2 **cur_line = lines;
+	struct stuff2 **cur_line;
 
 	fprintf(out, "-----BEGIN GEEK CODE BLOCK-----\n");
 	fprintf(out, "Version: 3.12\n");
 
-	while (*cur_line) {
-		struct stuff2 *cur_question = *cur_line;
-		while (cur_question->answer) {
+	for (cur_line = lines; *cur_line; cur_line++) {
+		struct stuff2 *cur_question;
+		for (cur_question = *cur_line; cur_question->answer; cur_question++) {
 			struct stuff *content;
 			if (!cur_question->display)
-				goto end;
+				continue;
 			content = getcontent(cur_question);
 			if (!content) {
 				fprintf(stderr, "\n%s\n", cur_question->name);
@@ -183,11 +180,8 @@ void output_code(FILE *out)
 				fputs(content->alias, out);
 			}
 			fprintf(out, " ");
-end:
-			cur_question++;
 		}
 		fprintf(out, "\n");
-		cur_line++;
 	}
 
 	fprintf(out, "\n");
@@ -196,11 +190,10 @@ end:
 
 void output_answers(FILE *out)
 {
-	struct stuff2 **cur_line = lines;
-
-	while (*cur_line) {
-		struct stuff2 *cur_question = *cur_line;
-		while (cur_question->answer) {
+	struct stuff2 **cur_line;
+	for (cur_line = lines; *cur_line; cur_line++) {
+		struct stuff2 *cur_question;
+		for (cur_question = *cur_line; cur_question->answer; cur_question++) {
 			struct stuff *content = getcontent(cur_question);
 			if (!content) {
 				perror("There was an error getting an answer");
@@ -208,9 +201,7 @@ void output_answers(FILE *out)
 			}
 			fprintf(out, "%s: %s\n",
 				cur_question->name, content->comment);
-			cur_question++;
 		}
-		cur_line++;
 	}
 }
 
