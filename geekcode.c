@@ -117,8 +117,10 @@ int read_code(FILE *in)
 			return -1;
 		goto next_loop;
 	}
-	/* We didn't skip this, so fgets failed before we reached the start of
-	 * a GEEK CODE block. */
+	/*
+	 * We didn't skip this, so fgets failed before we reached the start of
+	 * a GEEK CODE block.
+	 * */
 	return -1;
 next_loop:
 	while (fgets(data, sizeof(data), in)) {
@@ -151,7 +153,9 @@ void create_code(void)
 				}
 				aux_string = aux->alias;
 			}
-			cur_question->answer = getanswer(cur_question->name, page_num, cur_question->contents, aux_string);
+			cur_question->answer =
+				getanswer(cur_question->name, page_num,
+					cur_question->contents, aux_string);
 			cur_question++;
 			page_num++;
 		}
@@ -213,7 +217,8 @@ void output_answers(FILE *out)
 				perror("There was an error getting an answer");
 				exit(1);
 			}
-			fprintf(out, "%s: %s\n", cur_question->name, content->comment);
+			fprintf(out, "%s: %s\n",
+				cur_question->name, content->comment);
 			cur_question++;
 		}
 		cur_line++;
@@ -244,7 +249,8 @@ FILE *open_file(const char *filename, const char *mode)
 		file_error(filename, "checking");
 
 	if (S_ISREG(fileinfo.st_mode) != 1){
-		fprintf(stderr, "Error, file \"%s\" isn't a regular file\n", filename);
+		fprintf(stderr, "Error, file \"%s\" isn't a regular file\n",
+			filename);
 		exit(1);
 	}
 
