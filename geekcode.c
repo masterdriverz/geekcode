@@ -42,26 +42,26 @@ int process_line(struct stuff2 *line, char *data)
 	char *last, *p;
 	for ((p = strtok_r(data, " ", &last)); p && line->answer;
 		(p = strtok_r(NULL, " ", &last)), line++) {
+
 		struct stuff *temp;
 		char c=0;
+
 		while (!line->display)
 			line++;
-		temp = line->contents;
-		while (temp->alias) {
+
+		for (temp = line->contents; temp->alias; temp++) {
 			char buf[256];
 			if (line->dependant) {
 				if (sscanf(p, temp->alias, &c))
 					snprintf(buf, sizeof(buf), temp->alias, c);
 				else
-					goto end;
+					continue;
 			} else {
 				strncpy(buf, temp->alias, sizeof(buf)-1);
 				buf[sizeof(buf)-1] = '\0';
 			}
 			if (!strcmp(buf, p))
 				goto out;
-end:
-			temp++;
 		}
 		errno = EINVAL;
 		return -1;
