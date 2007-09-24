@@ -149,7 +149,6 @@ void create_code(void)
 	}
 }
 
-
 void output_code(FILE *out)
 {
 	struct stuff2 **cur_line;
