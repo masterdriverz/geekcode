@@ -14,6 +14,12 @@
 #include "gc_getanswer.h"
 #include "gc_consoleio.h"
 
+#define eof_error() do {		\
+	fprintf(stderr,			\
+"\n\nGot EOF on stdin, aborting...\n");	\
+	exit(1);			\
+} while (0);
+
 /* Return the amount of character c's in s */
 static int count(char *s, char c)
 {
