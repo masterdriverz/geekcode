@@ -42,8 +42,6 @@ const struct stuff gc_unix_type[] = {
 	SENTINEL
 };
 
-#define foo unix
-#undef unix
 const struct stuff gc_unix[] = {
 	{1, "U%c++++",	"I am the sysadmin. If you try and crack my machine don't be surprised\n"
 			"         if the municipal works department gets an \"accidental\" computer\n"
