@@ -30,14 +30,30 @@ static int count(const char *s, char c)
 	return i;
 }
 
-static char *make_spaces(int amount)
+static char *make_spaces(unsigned int amount)
 {
-	/* Cache? */
-	char *s=malloc(amount+1);
-	if (!s)
-		return NULL;
-	memset(s, ' ', amount);
+	static char s[67];
+	static int prev=-1;
+
+	if (prev == -1) {
+		memset(s, ' ', amount);
+		s[66] = '\0';
+	} else if (amount == prev) {
+		return s;
+	} else {
+		s[prev] = ' ';
+	}
+#ifdef DEBUG
+	printf("\nprev: %d\namount: %d\nspaces: '%s'\n",
+		prev, amount, s);
+#endif
+
+	prev = amount;
 	s[amount] = '\0';
+
+#ifdef DEBUG
+	printf("len: %d\n", strlen(s));
+#endif
 	return s;
 }
 
@@ -93,7 +109,6 @@ int getanswer(const char *name, int page_num,
 		clear_kb();
 	} while (selection < 0 || selection > line_count);
 
-	free(spaces);
 	if (selection == 0)
 		exit(0);
 	else
