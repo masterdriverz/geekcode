@@ -11,8 +11,8 @@
 #include <string.h>
 
 #include "geekcode.h"
-#include "gc_getanswer.h"
-#include "gc_consoleio.h"
+#include "getanswer.h"
+#include "consoleio.h"
 
 #define eof_error() do {		\
 	fprintf(stderr,			\
