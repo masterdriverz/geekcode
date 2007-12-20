@@ -15,12 +15,12 @@
 #define MAX_LINES 21
 
 struct stuff {
-	char *alias, *comment;
+	const char *alias, *comment;
 };
 
 struct stuff2 {
 	int answer, display;
-	char *name;
+	const char *name;
 	const struct stuff *contents;
 	int dependant;
 };
