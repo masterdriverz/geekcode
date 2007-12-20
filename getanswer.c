@@ -100,7 +100,7 @@ int getanswer(const char *name, int page_num,
 		return selection;
 }
 
-struct stuff *getcontent(struct stuff2 *obj)
+struct stuff *getcontent(const struct stuff2 *obj)
 {
 	if (!obj->answer || obj->answer == -1) {
 		errno = EINVAL;
