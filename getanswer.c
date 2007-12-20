@@ -74,14 +74,11 @@ int getanswer(const char *name, int page_num,
 		for (i=0; objects[i].comment; i++) {
 			char *s=objects[i].alias;
 			if (!num_count) {
+				int c;
 				printf("Press enter to continue: ");
-				while (1) {
-					int c = getchar();
+				while ((c = getchar()) != '\n')
 					if (c == EOF)
 						eof_error();
-					if (c == '\n')
-						break;
-				}
 				num_count = MAX_LINES;
 				overflowed = 1;
 			}
