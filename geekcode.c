@@ -211,7 +211,7 @@ void output_answers(FILE *out)
 }
 
 const char usage_str[] = "\
-./geekcode [ --read || --write || --output ] <file>\n\
+./geekcode [ --read || --write [ --output=file ] ] <file>\n\
   --read\n\
      Translate a geekcode file (reads from stdin if no files given).\n\
   --write\n\
