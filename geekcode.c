@@ -255,7 +255,7 @@ int main(int argc, char **argv)
 {
 	char *outfile=NULL;
 	int read=0, write=0, output=0, c, index;
-	struct option long_options[] = {
+	const struct option long_options[] = {
 		{"read",	no_argument,		NULL,	'r'},
 		{"write",	no_argument,		NULL,	'w'},
 		{"output",	required_argument,	NULL,	'o'},
