@@ -43,21 +43,22 @@ int process_line(struct stuff2 *line, char *data)
 	for ((p = strtok_r(data, " ", &last)); p && line->answer;
 		(p = strtok_r(NULL, " ", &last)), line++) {
 
+		int i;
 		struct stuff *temp;
 		char c=0;
 
 		while (!line->display)
 			line++;
 
-		for (temp = line->contents; temp->alias; temp++) {
+		for (temp = line->contents, i=0; temp[i].alias; i++) {
 			char *n, buf[256];
 			if (line->dependant) {
-				if (sscanf(p, temp->alias, &c))
-					snprintf(buf, sizeof(buf), temp->alias, c);
+				if (sscanf(p, temp[i].alias, &c))
+					snprintf(buf, sizeof(buf), temp[i].alias, c);
 				else
 					continue;
 			} else {
-				strncpy(buf, temp->alias, sizeof(buf)-1);
+				strncpy(buf, temp[i].alias, sizeof(buf)-1);
 				buf[sizeof(buf)-1] = '\0';
 			}
 			n = strchr(p, '\n');
@@ -69,7 +70,7 @@ int process_line(struct stuff2 *line, char *data)
 		errno = EINVAL;
 		return -1;
 out:
-		line->answer = temp->num;
+		line->answer = i;
 		if (c) {
 			struct stuff *temp;
 			int i;

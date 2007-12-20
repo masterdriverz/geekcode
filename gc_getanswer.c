@@ -52,7 +52,7 @@ int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
 
 		printf("%s%sPage %2i of %i\n", name, spaces, PAGES-(PAGES-page_num), PAGES);
 		puts("===============================================================================");
-		for (i=0; objects[i].num; i++) {
+		for (i=0; objects[i].comment; i++) {
 			char *s=objects[i].alias;
 			if (!num_count) {
 				printf("Press enter to continue: ");
@@ -74,7 +74,7 @@ int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
 				}
 				sprintf(s, objects[i].alias, additional);
 			}
-			printf("%2d %-5s %s\n", objects[i].num, s, objects[i].comment);
+			printf("%2d %-5s %s\n", i+1, s, objects[i].comment);
 			num_count -= count(objects[i].comment, '\n')+1;
 			if (additional)
 				free(s);
@@ -99,18 +99,10 @@ int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
 
 struct stuff *getcontent(struct stuff2 *obj)
 {
-	struct stuff *temp;
-
 	if (!obj->answer || obj->answer == -1) {
 		errno = EINVAL;
 		return NULL;
 	}
 
-	for (temp=obj->contents; temp->num; temp++)
-		if (obj->answer == temp->num)
-			return temp;
-
-	/* We should never get here */
-	errno = EINVAL;
-	return NULL;
+	return &obj->contents[obj->answer];
 }
