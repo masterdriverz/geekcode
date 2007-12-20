@@ -41,7 +41,9 @@ static char *make_spaces(int amount)
 	return s;
 }
 
-int getanswer(char *name, int page_num, struct stuff *objects, char *additional)
+int getanswer(const char *name, int page_num,
+		const struct stuff *objects,
+		const char *additional)
 {
 	int selection, line_count;
 	char *spaces=make_spaces(66-strlen(name));

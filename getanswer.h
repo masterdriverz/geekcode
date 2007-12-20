@@ -2,6 +2,8 @@
 #define _GETANSWER_H
 
 struct stuff *getcontent(struct stuff2 *obj);
-int getanswer(char *name, int page_num, struct stuff *objects, char *additional);
+int getanswer(const char *name, int page_num,
+		const struct stuff *objects,
+		const char *additional);
 
 #endif
