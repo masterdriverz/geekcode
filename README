@@ -1,92 +1,42 @@
-Geek Code Generator v1.7.3 - Generates your geek code
+Geek Code Generator v2 - Generates your geek code
 Copyright (C) 1999-2003 Chris Gushue <chris@blackplasma.net>
+Copyright (C) 2007 Charlie Shepherd <masterdriverz@gentoo.org>
 
------------------------------------------------------------------------
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-at your option) any later version.
+Overview
+--------
+Geekcode is a small project that generates and translates geekcode.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+History
+-------
+Originally Geekcode was authored by Chris Gushue, who presumably still holds
+some copyright on some of the files, although most (if not all) of the
+original code has been changed. I built and ran the program one dark evening
+in '06, wanted to fix some small bug (which one it was escapes me now), and
+was shocked by the massive amounts of unnecessary repetition. I re-wrote a
+large part of it, and then emailed Chris. I have not (as yet) received a
+reply: Chris, if you're reading this, you're welcome to reclaim this project!
+I do not consider this a fork, only a new maintainership.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
------------------------------------------------------------------------
+Building and Installing
+-----------------------
+Execute `make` to build geekcode, and `make install` to install it.
 
-This program will generate a geek code block for you by simply
-choosing which codes suit you from the screen. I am not a very good
-programmer, I just dabble a little every now and then.
+Windows Notes
+-------------
+Originally, this built (and presumably ran) on Windows. I do not use Windows,
+and have no access to any development tools on it. I've kept the only
+compatibility parts (in consoleio.c), in the hope it makes Geekcode work on
+Windows, but frankly, I have no interest in persuing the matter any further.
+Any patches improving Windows support will be received gladly.
 
-Originally, I started this project in Visual Basic, but decided to use
-DJGPP v2 instead, partially because it is free, partially because it is
-more portable and partially because Visual Basic sucks :) Since then, I
-have totally switched my system to Linux. Currently, my system is
-Slackware 4.0 (partially) converted to glibc 2.1.1, but I will be
-installing Debian 2.1 very soon.
+License
+-------
+Geekcode is licensed under GPLv2 ONLY.
 
-To use this program, you just run the resulting binary and follow
-the directions. Everything SHOULD work, but I haven't tested it
-all that much.
-
-If you have any bugs, patches, typos, comments, flames, money, 
-postcards, or any other free stuff - feel free to email me
-at chris@blackplasma.net - also, please let me know if you modify 
-this source, so I can try it myself.
-
------------------------------------------------------------------------
-
-Linux notes:
-
-This program was developed using gcc 2.95.1, glibc 2.1.2, and various
-other GNU tools, on Debian GNU/Linux (potato), with the 2.2.12 kernel.
-
-To install on Linux (and most likely other UNIX variants):
-
-    make
-
------------------------------------------------------------------------
-
-DOS notes:
-
-DJGPP v2 is available at http://www.delorie.com/djgpp/ including
-CWSDPMI, which is also released under the GPL. This executable is
-required if your OS doesn't provide DPMI services (Windows 9x does).
-You have the right to receive the source for CWSDPMI, as well as any
-binary updates. These things should also be available at the site
-listed above for DJGPP.
-
-To compile on DOS with DJGPP v2, try this:
-
-	gcc -O3 -s -o geekcode.exe *.c
-
-Also, if you have the DJGPP make package instaled, you can probably
-just type make, and ignore any errors you might get (at least, I could
-do that in my limited testing on my other system).
-
------------------------------------------------------------------------
-
-Relevant references:
---------------------
-http://www.geekcode.com  - Geek Code website
-http://www.gnu.org       - GNU Project and FSF (Free Software Foundation)
-http://www.delorie.com   - Home of the DJGPP compiler
-http://www.debian.org    - Debian GNU/Linux (the distribution I use)
-http://www.slashdot.org  - Geek site extraordinaire
-http://www.freshmeat.net - Ultimate Linux software database
-http://www.mutt.org      - The best email client
-http://www.vim.org       - A nice editor, I recently started using it
-
------------------------------------------------------------------------
-The Geek Code is copyright (C) 1993, 1994, 1995, 1996 by Robert A.
-Hayden. All rights reserved. You are free to distribute this code in
-electronic format provided that the file remains unmodified and this
-copyright notice remains attached. This copyright prohibits HTMLizing
-the code for publication on the web. If you wish to publish abstracts
-or portions of the code, contact the author for permission. If you
-wish to write an article about the Geek Code, please contact the
-author. All creatures not native to Earth are exempt from this
-copyright, however, they must prove that they qualify.
+Todo
+----
+Things I would still like to implement in Geekcode:
+  - Adding support for updating geekcode files.
+  - Improved usability.
+  - GUI version.
+  - Supporting multiple geekcode versions.
