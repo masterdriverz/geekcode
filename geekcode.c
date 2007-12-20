@@ -248,7 +248,7 @@ FILE *open_file(const char *filename, const char *mode)
 int main(int argc, char **argv)
 {
 	char *outfile=NULL;
-	int read=0, write=0, help=0, output=0, c, index;
+	int read=0, write=0, output=0, c, index;
 	struct option long_options[] = {
 		{"read",	no_argument,		NULL,	'r'},
 		{"write",	no_argument,		NULL,	'w'},
@@ -265,8 +265,8 @@ int main(int argc, char **argv)
 			write = 1;
 			break;
 		case 'h':
-			help = 1;
-			break;
+			usage(stdout);
+			return 0;
 		case 'o':
 			output = 1;
 			outfile = optarg;
@@ -275,10 +275,6 @@ int main(int argc, char **argv)
 			usage(stderr);
 			return -1;
 		}
-	}
-	if (help) {
-		usage(stdout);
-		return 0;
 	}
 	if (output && read) {
 		fprintf(stderr, "It only makes sense to use --output with --write.\n");
