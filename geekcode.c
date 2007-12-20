@@ -211,7 +211,8 @@ void output_answers(FILE *out)
 }
 
 const char usage_str[] = "\
-./geekcode [ --read || --write [ --output=file ] ] <file>\n\
+./geekcode [ --read || --write [ --output=file ] || --version ] <file>\n\
+" VERSIONSTR "\n\n\
   --read\n\
      Translate a geekcode file (reads from stdin if no files given).\n\
   --write\n\
@@ -220,10 +221,16 @@ const char usage_str[] = "\
      (Only applicable with --write.)\n\
      Write the final geekcode to file (but still write the questions to stdout).\
 ";
+const char version_str[] = VERSIONSTR;
 
 inline void usage(FILE *out)
 {
 	fputs(usage_str, out);
+}
+
+inline void version(void)
+{
+	puts(version_str);
 }
 
 FILE *open_file(const char *filename, const char *mode)
@@ -254,6 +261,7 @@ int main(int argc, char **argv)
 		{"write",	no_argument,		NULL,	'w'},
 		{"output",	required_argument,	NULL,	'o'},
 		{"help",	no_argument,		NULL,	'h'},
+		{"version",	no_argument,		NULL,	'v'},
 		{NULL, 0, NULL, 0}
 	};
 	while ((c = getopt_long(argc, argv, "rwho:", long_options, &index)) != -1) {
@@ -271,6 +279,9 @@ int main(int argc, char **argv)
 			output = 1;
 			outfile = optarg;
 			break;
+		case 'v':
+			version();
+			return 0;
 		default:
 			usage(stderr);
 			return -1;
