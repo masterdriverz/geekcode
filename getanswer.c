@@ -15,8 +15,8 @@
 #include "consoleio.h"
 
 #define eof_error() do {		\
-	fprintf(stderr,			\
-"\n\nGot EOF on stdin, aborting...\n");	\
+	fputs("\nGot EOF on stdin, aborting...\n", \
+		stderr);		\
 	exit(1);			\
 } while (0);
 

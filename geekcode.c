@@ -157,8 +157,8 @@ void output_code(FILE *out)
 {
 	struct stuff2 **cur_line;
 
-	fprintf(out, "-----BEGIN GEEK CODE BLOCK-----\n");
-	fprintf(out, "Version: 3.12\n");
+	fputs("-----BEGIN GEEK CODE BLOCK-----\n", out);
+	fputs("Version: 3.12\n", out);
 
 	for (cur_line = lines; *cur_line; cur_line++) {
 		struct stuff2 *cur_question;
@@ -184,13 +184,12 @@ void output_code(FILE *out)
 			} else {
 				fputs(content->alias, out);
 			}
-			fprintf(out, " ");
+			putc(' ', out);
 		}
-		fprintf(out, "\n");
+		putc('\n', out);
 	}
 
-	fprintf(out, "\n");
-	fprintf(out, "------END GEEK CODE BLOCK------\n");
+	fputs("\n------END GEEK CODE BLOCK------\n", out);
 }
 
 void output_answers(FILE *out)
@@ -288,14 +287,14 @@ int main(int argc, char **argv)
 		}
 	}
 	if (output && read) {
-		fprintf(stderr, "It only makes sense to use --output with --write.\n");
+		fputs("It only makes sense to use --output with --write.\n", stderr);
 		usage(stderr);
 		return -1;
 	}
 	if (read) {
 		FILE *f=NULL;
 		if (write) {
-			fprintf(stderr, "Can't read and write a file at the same time.\n");
+			fputs("Can't read and write a file at the same time.\n", stderr);
 			usage(stderr);
 			return -1;
 		}
@@ -305,7 +304,7 @@ int main(int argc, char **argv)
 			if (fclose(f))
 				file_error(argv[index], "closing");
 			output_answers(stdout);
-			printf("\n");
+			putc('\n', stdout);
 		}
 		/* If we haven't opened anything, use stdin */
 		if (!f) {
@@ -319,7 +318,7 @@ int main(int argc, char **argv)
 		else
 			f = stdout;
 		if (optind < argc) {
-			fprintf(stderr, "--write takes no arguments\n");
+			fputs("--write takes no arguments\n", stderr);
 			usage(stderr);
 			return -1;
 		}
