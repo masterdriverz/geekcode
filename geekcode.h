@@ -11,8 +11,10 @@
 #include <stdlib.h>
 
 #define VERSION 2
-#define str(x) #x
+#define _str(x) #x
+#define str(x) _str(x)
 #define VERSIONSTR "Geekcode version v" str(VERSION)
+
 #define PAGES 36
 #define MAX_LINES 21
 
