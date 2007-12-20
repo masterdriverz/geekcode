@@ -1,5 +1,5 @@
-#ifndef _GC_LINES_H
-#define _GC_LINES_H
+#ifndef _LINES_H
+#define _LINES_H
 
 extern struct stuff2 *lines[];
 

@@ -5,8 +5,8 @@
  * License: GPL2
  */
 
-#ifndef __INCLUDED_GEEKCODE_H__
-#define __INCLUDED_GEEKCODE_H__
+#ifndef _GEEKCODE_H
+#define _GEEKCODE_H
 
 #include <stdlib.h>
 
@@ -27,4 +27,4 @@ struct stuff2 {
 
 #define SENTINEL {NULL, NULL}
 
-#endif /* __INCLUDED_GEEKCODE_H__ */
+#endif /* _GEEKCODE_H */
