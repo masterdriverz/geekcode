@@ -1,7 +1,7 @@
 CFLAGS += -Wall -Iobjs/ -I.
 TARGET  = geekcode
-CC     ?= gcc
-PREFIX ?= /usr/local
+PREFIX  = /usr/local
+BINDIR  = $(PREFIX)/bin
 
 LIBFILES = \
 	consoleio.o	\
@@ -21,13 +21,13 @@ objs: force_look
 
 clean:
 	cd objs; $(MAKE) $(MFLAGS) clean
-	rm -f $(TARGET) *.o
+	$(RM) -f $(TARGET) *.o
 
 geekcode: $(LIBFILES) objs
 	$(CC) $(LDFLAGS) -o $(TARGET) $(LIBFILES) objs/*.o
 
 install:
-	install -m 755 geekcode $(PREFIX)/bin
+	$(INSTALL) -m 755 $(TARGET) $(BINDIR)
 
 force_look:
 	true
