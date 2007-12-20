@@ -1,0 +1,52 @@
+{ gc_dress:
+	{"d++",	"I tend to wear conservative dress such as a business suit or\n"
+			"        worse, a tie."}
+	{"d+",	"Good leisure-wear. Slacks, button-shirt, etc. No jeans, tennis\n"
+			"        shoes, or t-shirts."}
+	{"d",	"I dress a lot like those found in catalog ads. Bland, boring,\n"
+			"        without life or meaning."}
+	{"d-",	"I'm usually in jeans and a t-shirt."}
+	{"d--",	"My t-shirts go a step further and have a trendy political\n"
+			"        message on them."}
+	{"d---",	"Punk dresser, including, but not limited to, torn jeans and\n"
+			"        shirts, body piercings, and prominent tattoos."}
+	{"dx",	"Cross dresser."}
+	{"d?",	"I have no idea what I am wearing now, let alone what I wore yesterday."}
+	{"!d",	"No clothing. Quite a fashion statement, don't you think?"}
+	{"dpu",	"I wear the same clothes all the time, no matter the occasion,\n"
+			"        forgetting to do laundry between wearings."}
+}
+
+{ gc_height:
+	{"s+++",	"I usually have to duck through doors."}
+	{"s++",	"I'm a basketball candidate."}
+	{"s+",	"I'm a little taller than most."}
+	{"s",	"I'm an average geek."}
+	{"s-",	"I look up to most people."}
+	{"s--",	"I look up to damn near everybody."}
+	{"s---",	"I take a phone book with me when I go out so I can eat dinner."}
+}
+
+{ gc_weight:
+	{"s+++",	"I take up three movie seats."}
+	{"s++",	"I'm a linebacker candidate."}
+	{"s+",	"I'm a little rounder than most."}
+	{"s",	"I'm an average geek."}
+	{"s-",	"Everybody tells me to gain a few pounds."}
+	{"s--",	"I tend to have to fight against a strong breeze."}
+	{"s---",	"My bones are poking through my skin."}
+}
+
+{ gc_age:
+	{"a+++",	"60 and up"}
+	{"a++",	"50-59"}
+	{"a+",	"40-49"}
+	{"a",	"30-39"}
+	{"a-",	"25-29"}
+	{"a--",	"20-24"}
+	{"a---",	"15-19"}
+	{"a----",	"10-14"}
+	{"a-----",	"9 and under (Geek in training?)"}
+	{"a?",	"Immortal"}
+	{"!a",	"It's none of your business how old I am"}
+}

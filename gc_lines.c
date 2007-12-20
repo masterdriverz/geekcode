@@ -4,12 +4,12 @@
  * License: GPL2
  */
 
-#include "gc_appearance.h"
-#include "gc_computers.h"
-#include "gc_entertainment.h"
-#include "gc_lifestyle.h"
-#include "gc_politics.h"
-#include "gc_type.h"
+#include "objs/appearance.h"
+#include "objs/computers.h"
+#include "objs/entertainment.h"
+#include "objs/lifestyle.h"
+#include "objs/politics.h"
+#include "objs/type.h"
 
 #define HIDDEN(ident, name)		{-1, 0, name, ident, 0},
 #define INDEPENDANT(ident, name)	{-1, 1, name, ident, 0},

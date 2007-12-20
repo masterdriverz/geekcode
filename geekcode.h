@@ -15,17 +15,16 @@
 #define MAX_LINES 21
 
 struct stuff {
-	int num;
 	char *alias, *comment;
 };
 
 struct stuff2 {
 	int answer, display;
 	char *name;
-	struct stuff *contents;
+	const struct stuff *contents;
 	int dependant;
 };
 
-#define SENTINEL {0, NULL, NULL}
+#define SENTINEL {NULL, NULL}
 
 #endif /* __INCLUDED_GEEKCODE_H__ */

@@ -1,0 +1,30 @@
+{ gc_type:
+	{"GB",	"Geek of Business"}
+	{"GC",	"Geek of Classics"}
+	{"GCA",	"Geek of Commercial Arts"}
+	{"GCM",	"Geek of Computer Management"}
+	{"GCS",	"Geek of Computer Science"}
+	{"GCC",	"Geek of Communications"}
+	{"GE",	"Geek of Engineering"}
+	{"GED",	"Geek of Education"}
+	{"GFA",	"Geek of Fine Arts"}
+	{"GG",	"Geek of Government"}
+	{"GH",	"Geek of Humanities"}
+	{"GIT",	"Geek of Information Technology"}
+	{"GJ",	"Geek of Jurisprudence (Law)"}
+	{"GLS",	"Geek of Library Science"}
+	{"GL",	"Geek of Literature"}
+	{"GMC",	"Geek of Mass Communications"}
+	{"GM",	"Geek of Math"}
+	{"GMD",	"Geek of Medicine"}
+	{"GMU",	"Geek of Music"}
+	{"GPA",	"Geek of Performing Arts"}
+	{"GP",	"Geek of Philosophy"}
+	{"GS",	"Geek of Science"}
+	{"GSS",	"Geek of Social Science"}
+	{"GTW",	"Geek of Technicial Writing"}
+	{"GO",	"Geek of Other"}
+	{"GU",	"Geek of Undecided"}
+	{"G!",	"Geek of No Qualifications"}
+	{"GAT",	"Geek of All Trades"}
+}

@@ -1,0 +1,72 @@
+{ gc_education:
+	{"e+++++",	"I am Stephen Hawking"}
+	{"e++++",	"Managed to get my Ph.D."}
+	{"e+++",	"Got a Master degree"}
+	{"e++",	"Got a Bachelors degree"}
+	{"e+",	"Got an Associates degree"}
+	{"e",	"Finished High School"}
+	{"e-",	"Haven't finished High School"}
+	{"e--",	"Haven't even entered High School"}
+	{"e*",	"I learned everything there is to know about life from the\n"
+			"         \"Hitchhiker's Trilogy\""}
+}
+
+{ gc_housing:
+	{"h++",	"Living in a cave with 47 computers and an Internet feed, located near a\n"
+			"        Dominoes pizza (See !d)"}
+	{"h+",	"Living alone, get out once a week to buy food, no more than once a\n"
+			"        month to do laundry. All surfaces covered."}
+	{"h",	"Friends come over to visit every once in a while to talk about Geek\n"
+			"        things. There is a place for them to sit."}
+	{"h-",	"Living with one or more registered Geeks."}
+	{"h--",	"Living with one or more people who know nothing about being a Geek and\n"
+			"        refuse to watch Babylon 5."}
+	{"h---",	"Married, (persons living romantically with someone might as well lab\n"
+			"        themselves h---, you're as good as there)"}
+	{"h----",	"Married with children - Al Bundy can sympathize."}
+	{"h!",	"I am stuck living with my parents!"}
+	{"h*",	"I'm not sure where I live anymore. This lab/workplace seems like home"
+			"        to me."}
+}
+
+{ gc_relationships:
+	{"r+++",	"Found someone, dated, and am now married."}
+	{"r++",	"I've dated my current S.O. for a long time."}
+	{"r+",	"I date frequently, bouncing from one relationship to another."}
+	{"r",	"I date periodically."}
+	{"r-",	"I have difficulty maintaining a relationship."}
+	{"r--",	"People just aren't interested in dating me."}
+	{"r---",	"I'm beginning to think that I'm a leper or something, the way people\n"
+			"        avoid me like the plague."}
+	{"!r",	"I've never had a relationship."}
+	{"r*",	"Signifying membership in the SBCA (Sour Bachelor(ette)'s Club of\n"
+			"        America). The motto is 'Bitter, but not Desperate'.\n"
+			"        First founded at Caltech."}
+	{"r%%",	"I was going out with someone, but the asshole dumped me."}
+}
+
+{ gc_gender:
+	{"x",	"I am a female"}
+	{"y",	"I am a male"}
+	{"z",	"I do not wish to disclose my gender"}
+}
+
+{ gc_sex:
+	{"%c+++++",	"I am Madonna"}
+	{"%c++++",	"I have a few little rug rats to prove I've been there. Besides, with\n"
+			"          kids around, who has time for sex?"}
+	{"%c+++",	"I'm married, so I can get it (theoretically) whenever I want."}
+	{"%c++",	"I was once referred to as 'easy'. I have no idea where that might\n"
+			"          have come from though."}
+	{"%c+",	"I've had real, live sex."}
+	{"%c",	"I've had sex. Oh! You mean with someone else? Then no."}
+	{"%c-",	"Not having sex by choice."}
+	{"%c--",	"Not having sex because I just can't get any..."}
+	{"%c---",	"Not having sex because I'm a nun or priest."}
+	{"%c*",	"I'm a pervert."}
+	{"%c**",	"I've been known to make perverts look like angels."}
+	{"!%c",	"Sex? What's that? I've had no sexual experiences."}
+	{"%c?",	"It's none of your business what my sex life is like (this is used to\n"
+			"          denote your gender only)."}
+	{"!%c+",	"Sex? What's that? No experience, willing to learn!"}
+}
