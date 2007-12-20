@@ -72,7 +72,7 @@ int getanswer(const char *name, int page_num,
 		printf("%s%sPage %2i of %i\n", name, spaces, page_num, PAGES);
 		puts("===============================================================================");
 		for (i=0; objects[i].comment; i++) {
-			char *s=objects[i].alias;
+			const char *alias = objects[i].alias;
 			if (!num_count) {
 				int c;
 				printf("Press enter to continue: ");
@@ -83,17 +83,18 @@ int getanswer(const char *name, int page_num,
 				overflowed = 1;
 			}
 			if (additional) {
-				s = malloc(strlen(s)+strlen(additional)+1);
+				char *s = malloc(strlen(s)+strlen(additional)+1);
 				if (!s) {
 					perror(NULL);
 					exit(-1);
 				}
 				sprintf(s, objects[i].alias, additional);
+				alias = s;
 			}
-			printf("%2d %-5s %s\n", i+1, s, objects[i].comment);
+			printf("%2d %-5s %s\n", i+1, alias, objects[i].comment);
 			num_count -= count(objects[i].comment, '\n')+1;
 			if (additional)
-				free(s);
+				free((void *)alias);
 			line_count++;
 		}
 		if (!overflowed)
@@ -112,7 +113,7 @@ int getanswer(const char *name, int page_num,
 		return selection;
 }
 
-struct stuff *getcontent(const struct stuff2 *obj)
+const struct stuff *getcontent(const struct stuff2 *obj)
 {
 	if (!obj->answer || obj->answer == -1) {
 		errno = EINVAL;

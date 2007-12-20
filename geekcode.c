@@ -44,7 +44,7 @@ int process_line(struct stuff2 *line, char *data)
 		(p = strtok_r(NULL, " ", &last)), line++) {
 
 		int i;
-		struct stuff *temp;
+		const struct stuff *temp;
 		char c=0;
 
 		while (!line->display)
@@ -72,7 +72,7 @@ int process_line(struct stuff2 *line, char *data)
 out:
 		line->answer = i;
 		if (c) {
-			struct stuff *temp;
+			const struct stuff *temp;
 			int i;
 			for (temp = (line-1)->contents, i = 1; temp->alias; temp++, i++)
 				if (*(temp->alias) == c)
@@ -137,9 +137,9 @@ void create_code(void)
 		for (cur_question = *cur_line;
 				cur_question->answer;
 				cur_question++, page_num++) {
-			char *aux_string=NULL;
+			const char *aux_string=NULL;
 			if (cur_question->dependant) {
-				struct stuff *aux = getcontent(cur_question-1);
+				const struct stuff *aux = getcontent(cur_question-1);
 				if (!aux) {
 					perror(NULL);
 					exit(1);
@@ -161,11 +161,11 @@ void output_code(FILE *out)
 	fputs("Version: 3.12\n", out);
 
 	for (cur_line = lines; *cur_line; cur_line++) {
-		struct stuff2 *cur_question;
+		const struct stuff2 *cur_question;
 		for (cur_question = *cur_line;
 				cur_question->answer;
 				cur_question++) {
-			struct stuff *content;
+			const struct stuff *content;
 			if (!cur_question->display)
 				continue;
 			content = getcontent(cur_question);
@@ -175,7 +175,7 @@ void output_code(FILE *out)
 				exit(1);
 			}
 			if (cur_question->dependant) {
-				struct stuff *aux = getcontent(cur_question-1);
+				const struct stuff *aux = getcontent(cur_question-1);
 				if (!aux) {
 					perror(NULL);
 					exit(1);
@@ -198,7 +198,7 @@ void output_answers(FILE *out)
 	for (cur_line = lines; *cur_line; cur_line++) {
 		struct stuff2 *cur_question;
 		for (cur_question = *cur_line; cur_question->answer; cur_question++) {
-			struct stuff *content = getcontent(cur_question);
+			const struct stuff *content = getcontent(cur_question);
 			if (!content) {
 				perror("There was an error getting an answer");
 				exit(1);
