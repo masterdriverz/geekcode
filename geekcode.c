@@ -134,7 +134,9 @@ void create_code(void)
 	int page_num=1;
 	for (cur_line = lines; *cur_line; cur_line++) {
 		struct stuff2 *cur_question;
-		for (cur_question = *cur_line; cur_question->answer; cur_question++, page_num++) {
+		for (cur_question = *cur_line;
+				cur_question->answer;
+				cur_question++, page_num++) {
 			char *aux_string=NULL;
 			if (cur_question->dependant) {
 				struct stuff *aux = getcontent(cur_question-1);
@@ -160,7 +162,9 @@ void output_code(FILE *out)
 
 	for (cur_line = lines; *cur_line; cur_line++) {
 		struct stuff2 *cur_question;
-		for (cur_question = *cur_line; cur_question->answer; cur_question++) {
+		for (cur_question = *cur_line;
+				cur_question->answer;
+				cur_question++) {
 			struct stuff *content;
 			if (!cur_question->display)
 				continue;
