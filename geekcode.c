@@ -92,7 +92,8 @@ found:
 
 /*
  * Reads geekcode from in and initialises the structures in lines
- * appropriately. Returns 0 on success, -1 on failure
+ * appropriately.
+ * Returns 0 on success, -1 on failure.
  */
 int read_code(FILE *in)
 {
