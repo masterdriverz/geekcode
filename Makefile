@@ -4,14 +4,14 @@ CC     ?= gcc
 PREFIX ?= /usr/local
 
 LIBFILES = \
-	gc_consoleio.o		\
-	gc_getanswer.o		\
-	gc_lines.o		\
+	consoleio.o	\
+	getanswer.o	\
+	lines.o		\
 	geekcode.o
 
 all: $(TARGET)
 
-gc_lines.o: gc_lines.c geekcode.h objs
+lines.o: lines.c geekcode.h objs
 
 %.o: %.c %.h geekcode.h
 	$(CC) -c -o $@ $< $(CFLAGS)

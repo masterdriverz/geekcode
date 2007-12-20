@@ -13,8 +13,8 @@
 #include <sys/stat.h>
 
 #include "geekcode.h"
-#include "gc_lines.h"
-#include "gc_getanswer.h"
+#include "lines.h"
+#include "getanswer.h"
 
 
 #define not_geek(filename) do {			\
