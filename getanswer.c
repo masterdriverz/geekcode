@@ -21,7 +21,7 @@
 } while (0);
 
 /* Return the amount of character c's in s */
-static int count(char *s, char c)
+static int count(const char *s, char c)
 {
 	int i=0;
 	for (; *s; s++)
