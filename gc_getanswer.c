@@ -33,10 +33,11 @@ static int count(char *s, char c)
 static char *make_spaces(int amount)
 {
 	/* Cache? */
-	char *s=malloc(amount);
+	char *s=malloc(amount+1);
 	if (!s)
 		return NULL;
 	memset(s, ' ', amount);
+	s[amount] = '\0';
 	return s;
 }
 
