@@ -235,7 +235,7 @@ FILE *open_file(const char *filename, const char *mode)
 	}
 
 	f = fopen(filename, mode);
-	if (f == NULL)
+	if (!f)
 		file_error(filename, "opening");
 	return f;
 }
