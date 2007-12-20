@@ -69,7 +69,7 @@ int getanswer(const char *name, int page_num,
 		line_count = 0;
 		clearscreen();
 
-		printf("%s%sPage %2i of %i\n", name, spaces, PAGES-(PAGES-page_num), PAGES);
+		printf("%s%sPage %2i of %i\n", name, spaces, page_num, PAGES);
 		puts("===============================================================================");
 		for (i=0; objects[i].comment; i++) {
 			char *s=objects[i].alias;
