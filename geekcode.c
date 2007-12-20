@@ -218,12 +218,12 @@ const char usage_str[] = "\
      Interactively input a geekcode (default).\n\
   --output <file>\n\
      (Only applicable with --write.)\n\
-     Write the final geekcode to file (but still write the questions to stdout).\n\
+     Write the final geekcode to file (but still write the questions to stdout).\
 ";
 
 inline void usage(FILE *out)
 {
-	fprintf(out, usage_str);
+	fputs(usage_str, out);
 }
 
 FILE *open_file(const char *filename, const char *mode)
