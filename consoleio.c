@@ -30,8 +30,6 @@ void clear_kb(void)
 #ifndef _WIN32
 
    /* Use standard ANSI codes for clearing screen */
-   #include <stdio.h>
-
    void clearscreen()
    {
       printf("\033[2J");
