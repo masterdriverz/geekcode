@@ -42,7 +42,7 @@ void clearscreen()
 
 void clearscreen()
 {
-	COORD coordScreen = { 0, 0 }; /* here's where we'll home the cursor */
+	COORD coordScreen = {0, 0}; /* here's where we'll home the cursor */
 	DWORD cCharsWritten;
 	HANDLE hConsole;
 	CONSOLE_SCREEN_BUFFER_INFO csbi; /* to get buffer info */
@@ -53,28 +53,22 @@ void clearscreen()
 	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
 	/* get the number of character cells in the current buffer */
-	GetConsoleScreenBufferInfo( hConsole, &csbi );
+	GetConsoleScreenBufferInfo(hConsole, &csbi);
 	dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
 
 	/* fill the entire screen with blanks */
-	FillConsoleOutputCharacter( hConsole,
-		(TCHAR) ' ',
-		dwConSize,
-		coordScreen,
-		&cCharsWritten );
+	FillConsoleOutputCharacter(hConsole, (TCHAR)' ', dwConSize,
+		coordScreen, &cCharsWritten);
 
 	/* get the current text attribute */
-	GetConsoleScreenBufferInfo( hConsole, &csbi );
+	GetConsoleScreenBufferInfo(hConsole, &csbi);
 
 	/* now set the buffer's attributes accordingly */
-	FillConsoleOutputAttribute( hConsole,
-		csbi.wAttributes,
-		dwConSize,
-		coordScreen,
-		&cCharsWritten );
+	FillConsoleOutputAttribute(hConsole, csbi.wAttributes, dwConSize,
+		coordScreen, &cCharsWritten);
 
 	/* put the cursor at (0, 0) */
-	SetConsoleCursorPosition( hConsole, coordScreen );
+	SetConsoleCursorPosition(hConsole, coordScreen);
  }
 
 #endif /* _WIN32 */
