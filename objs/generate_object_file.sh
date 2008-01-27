@@ -14,9 +14,11 @@ usage() {
 }
 
 e_usage() {
-	echo "Invalid command line." >&2
-	echo
-	usage >&2
+	{
+		echo "Invalid command line."
+		echo
+		usage
+	} >&2
 	exit 1
 }
 
@@ -54,7 +56,7 @@ header_file() {
 
 	sed -e 's/{ \(\w*\):/extern const struct stuff \1[];/' -e '/\t/d' -e '/}/d' $1
 	if [[ -n HEADER ]]; then
-		echo -e "\n#endif /* $HEADER */"
+		echo -e "\n#endif /* _${HEADER}_H */"
 	fi
 }
 
