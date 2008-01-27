@@ -1,2 +1,3 @@
 geekcode
 *.o
+objs/*.h
