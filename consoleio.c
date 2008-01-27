@@ -21,10 +21,17 @@
 
 #include <stdio.h>
 
-void clear_kb(void)
+/*
+ * Empties keyboard input buffer until it reaches a newline.
+ * Returns 1 on EOF, 0 otherwise.
+ */
+int clear_kb(void)
 {
-	char junk[80];
-	fgets(junk, sizeof(junk), stdin);
+	int c;
+	while ((c = getchar()) != '\n')
+		if (c == EOF)
+			return 1;
+	return 0;
 }
 
 #ifndef _WIN32

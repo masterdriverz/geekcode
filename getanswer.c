@@ -74,11 +74,9 @@ int getanswer(const char *name, int page_num,
 		for (i=0; objects[i].comment; i++) {
 			const char *alias = objects[i].alias;
 			if (!num_count) {
-				int c;
 				printf("Press enter to continue: ");
-				while ((c = getchar()) != '\n')
-					if (c == EOF)
-						eof_error();
+				if (clear_kb())
+					eof_error();
 				num_count = MAX_LINES;
 				overflowed = 1;
 			}
@@ -104,7 +102,8 @@ int getanswer(const char *name, int page_num,
 		if (scanf("%d", &selection) == EOF)
 			eof_error();
 
-		clear_kb();
+		if (clear_kb())
+			eof_error();
 	} while (selection < 0 || selection > line_count);
 
 	if (selection == 0)
