@@ -23,60 +23,58 @@
 
 void clear_kb(void)
 {
-   char junk[80];
-   fgets(junk, sizeof(junk), stdin);
+	char junk[80];
+	fgets(junk, sizeof(junk), stdin);
 }
 
 #ifndef _WIN32
 
-   /* Use standard ANSI codes for clearing screen */
-   void clearscreen()
-   {
-      printf("\033[2J");
-   }
+/* Use standard ANSI codes for clearing screen */
+void clearscreen()
+{
+	printf("\033[2J");
+}
 
 #else /* Win32 */
 
-   /* Use Win32 ConsoleIO for clearing screen */
-   #include <windows.h>
+/* Use Win32 ConsoleIO for clearing screen */
+#include <windows.h>
 
-   void clearscreen()
-   {
-      COORD coordScreen = { 0, 0 };    /* here's where we'll home the
-                                        cursor */
-      DWORD cCharsWritten;
-      HANDLE hConsole;
-      CONSOLE_SCREEN_BUFFER_INFO csbi; /* to get buffer info */
-      DWORD dwConSize;                 /* number of character cells in
-                                          the current buffer */
+void clearscreen()
+{
+	COORD coordScreen = { 0, 0 }; /* here's where we'll home the cursor */
+	DWORD cCharsWritten;
+	HANDLE hConsole;
+	CONSOLE_SCREEN_BUFFER_INFO csbi; /* to get buffer info */
+	DWORD dwConSize; /* number of character cells in the current buffer */
 
 
-      /* get a handle to StdOut */
-      hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	/* get a handle to StdOut */
+	hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
-      /* get the number of character cells in the current buffer */
-      GetConsoleScreenBufferInfo( hConsole, &csbi );
-      dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
+	/* get the number of character cells in the current buffer */
+	GetConsoleScreenBufferInfo( hConsole, &csbi );
+	dwConSize = csbi.dwSize.X * csbi.dwSize.Y;
 
-      /* fill the entire screen with blanks */
-      FillConsoleOutputCharacter( hConsole,
-                                  (TCHAR) ' ',
-                                  dwConSize,
-                                  coordScreen,
-                                  &cCharsWritten );
+	/* fill the entire screen with blanks */
+	FillConsoleOutputCharacter( hConsole,
+		(TCHAR) ' ',
+		dwConSize,
+		coordScreen,
+		&cCharsWritten );
 
-      /* get the current text attribute */
-      GetConsoleScreenBufferInfo( hConsole, &csbi );
+	/* get the current text attribute */
+	GetConsoleScreenBufferInfo( hConsole, &csbi );
 
-      /* now set the buffer's attributes accordingly */
-      FillConsoleOutputAttribute( hConsole,
-                                  csbi.wAttributes,
-                                  dwConSize,
-                                  coordScreen,
-                                  &cCharsWritten );
+	/* now set the buffer's attributes accordingly */
+	FillConsoleOutputAttribute( hConsole,
+		csbi.wAttributes,
+		dwConSize,
+		coordScreen,
+		&cCharsWritten );
 
-      /* put the cursor at (0, 0) */
-      SetConsoleCursorPosition( hConsole, coordScreen );
+	/* put the cursor at (0, 0) */
+	SetConsoleCursorPosition( hConsole, coordScreen );
  }
 
 #endif /* _WIN32 */
