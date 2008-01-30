@@ -218,7 +218,7 @@ const char usage_str[] = "\
      Interactively input a geekcode (default).\n\
   --output <file>\n\
      (Only applicable with --write.)\n\
-     Write the final geekcode to file (but still write the questions to stdout).\
+     Write the final geekcode to file (but still write the questions to stdout).\n\
 ";
 const char version_str[] = VERSIONSTR;
 
