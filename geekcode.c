@@ -47,23 +47,38 @@ int process_line(struct stuff2 *line, char *data)
 		const struct stuff *temp;
 		char c=0;
 
+		/* Skip lines we shouldn't display */
 		while (!line->display)
 			line++;
 
+		/*
+		 * XXX: This whole section is ick. It copies strings A LOT,
+		 *      which it shouldn't.
+		 */
+		/* Parse each 'element' in the text, put the value in the
+		 * line2 struct */
 		for (temp = line->contents, i=0; temp[i].alias; i++) {
 			char *n, buf[256];
+
+			/* Work out the dependant thing */
 			if (line->dependant) {
 				if (sscanf(p, temp[i].alias, &c))
+					/* Ick. */
 					snprintf(buf, sizeof(buf), temp[i].alias, c);
 				else
 					continue;
 			} else {
+				/* Ick. */
+				/* Just copy the string to buf if it's not dependant */
 				strncpy(buf, temp[i].alias, sizeof(buf)-1);
 				buf[sizeof(buf)-1] = '\0';
 			}
+
+			/* Kill those pesky newlines */
 			n = strchr(p, '\n');
 			if (n)
 				*n = '\0';
+
 			if (!strcmp(buf, p))
 				goto out;
 		}
@@ -71,6 +86,8 @@ int process_line(struct stuff2 *line, char *data)
 		return -1;
 out:
 		line->answer = i;
+
+		/* Set the answer of the dependant */
 		if (c) {
 			const struct stuff *temp;
 			int i;
