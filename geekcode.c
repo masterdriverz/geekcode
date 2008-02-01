@@ -22,7 +22,7 @@
 "Error, file \"%s\" isn't geekcode\n",		\
 		filename);			\
 	exit(1);				\
-} while (0);
+} while (0)
 
 #define file_error(filename, action) do {	\
 	char error[256];			\
@@ -30,7 +30,7 @@
 "Error while %s file \"%s\"", action, filename);\
 	perror(error);				\
 	exit(1);				\
-} while (0);
+} while (0)
 
 
 /*
