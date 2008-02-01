@@ -116,9 +116,9 @@ found:
 /*
  * Reads geekcode from in and initialises the structures in lines
  * appropriately.
- * Returns 0 on success, -1 on failure.
+ * Returns 0 on success, 1 on parsing failure, 2 on file error.
  */
-int read_code(FILE *in)
+unsigned int read_code(FILE *in)
 {
 	char data[1024];
 	struct stuff2 **cur_line = lines;
@@ -128,21 +128,18 @@ int read_code(FILE *in)
 			continue;
 		/* Skip version line */
 		if (!fgets(data, sizeof(data), in))
-			return -1;
+			return 2;
 		goto next_loop;
 	}
-	/*
-	 * We didn't skip this, so fgets failed before we reached the start of
-	 * a GEEK CODE block.
-	 * */
-	return -1;
+	/* fgets failed */
+	return 2;
 next_loop:
 	while (fgets(data, sizeof(data), in)) {
 		if (!strcmp(data, "------END GEEK CODE BLOCK------\n"))
 			break;
 		if (process_line(*cur_line, data)) {
-			perror("There was an error reading a line");
-			exit(1);
+			puts("There was an error reading a line");
+			return 1;
 		}
 		cur_line++;
 		if (!*cur_line)
@@ -322,8 +319,14 @@ int main(int argc, char **argv)
 			return -1;
 		}
 		for (index = optind; index < argc; index++) {
+			int ret;
 			f = open_file(argv[index], "r");
-			read_code(f);
+			if ((ret = read_code(f)) != 0) {
+				/* If 1, we've already output an error message */
+				if (ret == 2)
+					file_error(argv[index], "reading");
+				return ret;
+			}
 			if (fclose(f))
 				file_error(argv[index], "closing");
 			output_answers(stdout);
