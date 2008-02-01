@@ -43,7 +43,7 @@ enum line_errors {
  * Parses the contents of data into line.
  * Returns 0 on success, error code on failure.
  */
-int process_line(struct stuff2 *line, char *data)
+static unsigned int process_line(struct stuff2 *line, char *data)
 {
 	char *last, *p;
 	for ((p = strtok_r(data, " ", &last)); p && line->answer;
@@ -118,7 +118,7 @@ found:
  * appropriately.
  * Returns 0 on success, 1 on parsing failure, 2 on file error.
  */
-unsigned int read_code(FILE *in)
+static unsigned int read_code(FILE *in)
 {
 	char data[1024];
 	struct stuff2 **cur_line = lines;
@@ -149,7 +149,7 @@ next_loop:
 }
 
 /* Loop over lines, reading in answers from stdin */
-void create_code(void)
+static void create_code(void)
 {
 	struct stuff2 **cur_line;
 	int page_num=1;
@@ -174,7 +174,7 @@ void create_code(void)
 	}
 }
 
-void output_code(FILE *out)
+static void output_code(FILE *out)
 {
 	struct stuff2 **cur_line;
 
@@ -213,7 +213,7 @@ void output_code(FILE *out)
 	fputs("\n------END GEEK CODE BLOCK------\n", out);
 }
 
-void output_answers(FILE *out)
+static void output_answers(FILE *out)
 {
 	struct stuff2 **cur_line;
 	for (cur_line = lines; *cur_line; cur_line++) {
@@ -230,7 +230,7 @@ void output_answers(FILE *out)
 	}
 }
 
-const char usage_str[] = "\
+static const char usage_str[] = "\
 ./geekcode [ --read || --write [ --output=file ] || --version ] <file>\n\
 " VERSIONSTR "\n\n\
   --read\n\
@@ -241,19 +241,19 @@ const char usage_str[] = "\
      (Only applicable with --write.)\n\
      Write the final geekcode to file (but still write the questions to stdout).\n\
 ";
-const char version_str[] = VERSIONSTR;
+static const char version_str[] = VERSIONSTR;
 
-inline void usage(FILE *out)
+static inline void usage(FILE *out)
 {
 	fputs(usage_str, out);
 }
 
-inline void version(void)
+static inline void version(void)
 {
 	puts(version_str);
 }
 
-FILE *open_file(const char *filename, const char *mode)
+static FILE *open_file(const char *filename, const char *mode)
 {
 	FILE *f;
 	struct stat fileinfo;
