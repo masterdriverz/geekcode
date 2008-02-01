@@ -148,6 +148,7 @@ next_loop:
 	return 0;
 }
 
+/* Loop over lines, reading in answers from stdin */
 void create_code(void)
 {
 	struct stuff2 **cur_line;
