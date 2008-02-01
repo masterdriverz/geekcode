@@ -33,9 +33,15 @@
 } while (0)
 
 
+enum line_errors {
+	TRAILING = 1, /* Trailing text in data */
+	M_ALIAS, /* Missing alias */
+	M_DEPENDANT, /* Missing dependant */
+};
+
 /*
  * Parses the contents of data into line.
- * Returns 0 on success, -1 on failure, and sets errno appropriately.
+ * Returns 0 on success, error code on failure.
  */
 int process_line(struct stuff2 *line, char *data)
 {
@@ -82,8 +88,8 @@ int process_line(struct stuff2 *line, char *data)
 			if (!strcmp(buf, p))
 				goto out;
 		}
-		errno = EINVAL;
-		return -1;
+		return M_ALIAS;
+
 out:
 		line->answer = i;
 
@@ -94,16 +100,16 @@ out:
 			for (temp = (line-1)->contents, i = 1; temp->alias; temp++, i++)
 				if (*(temp->alias) == c)
 					goto found;
-			errno = EINVAL;
-			return -1;
+			return M_DEPENDANT;
+
 found:
 			(line-1)->answer = i;
 		}
 	}
-	if ((p && isalnum((unsigned char )*p)) || line->answer) {
-		errno = EINVAL;
-		return -1;
-	}
+
+	/* There's something left! */
+	if ((p && isalnum((unsigned char )*p)) || line->answer)
+		return TRAILING;
 	return 0;
 }
 
