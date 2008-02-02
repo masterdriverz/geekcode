@@ -119,5 +119,5 @@ const struct stuff *getcontent(const struct stuff2 *obj)
 		return NULL;
 	}
 
-	return &obj->contents[obj->answer];
+	return &obj->contents[obj->answer-1];
 }
