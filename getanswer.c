@@ -114,10 +114,8 @@ int getanswer(const char *name, int page_num,
 
 const struct stuff *getcontent(const struct stuff2 *obj)
 {
-	if (!obj->answer || obj->answer == -1) {
-		errno = EINVAL;
+	if (obj->answer <= 0)
 		return NULL;
-	}
 
 	return &obj->contents[obj->answer-1];
 }
