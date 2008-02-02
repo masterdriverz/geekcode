@@ -74,7 +74,7 @@ int getanswer(const char *name, int page_num,
 		for (i=0; objects[i].comment; i++) {
 			const char *alias = objects[i].alias;
 			if (!num_count) {
-				printf("Press enter to continue: ");
+				printf("Press enter to continue");
 				if (clear_kb())
 					eof_error();
 				num_count = MAX_LINES;
