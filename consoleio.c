@@ -20,6 +20,7 @@
 */
 
 #include <stdio.h>
+#include "consoleio.h"
 
 /*
  * Empties keyboard input buffer until it reaches a newline.
@@ -37,7 +38,7 @@ int clear_kb(void)
 #ifndef _WIN32
 
 /* Use standard ANSI codes for clearing screen */
-void clearscreen()
+void clearscreen(void)
 {
 	printf("\033[2J");
 }
@@ -47,7 +48,7 @@ void clearscreen()
 /* Use Win32 ConsoleIO for clearing screen */
 #include <windows.h>
 
-void clearscreen()
+void clearscreen(void)
 {
 	COORD coordScreen = {0, 0}; /* here's where we'll home the cursor */
 	DWORD cCharsWritten;
