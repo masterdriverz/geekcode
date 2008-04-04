@@ -18,14 +18,14 @@
 #define PAGES 36
 #define MAX_LINES 21
 
-struct stuff {
+struct elem {
 	const char *alias, *comment;
 };
 
-struct stuff2 {
+struct answer {
 	int answer, display;
 	const char *name;
-	const struct stuff *contents;
+	const struct elem *contents;
 	int dependant;
 };
 

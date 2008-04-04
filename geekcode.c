@@ -43,14 +43,14 @@ enum line_errors {
  * Parses the contents of data into line.
  * Returns 0 on success, error code on failure.
  */
-static unsigned int process_line(struct stuff2 *line, char *data)
+static unsigned int process_line(struct answer *line, char *data)
 {
 	char *last, *p;
 	for ((p = strtok_r(data, " ", &last)); p && line->answer;
 		(p = strtok_r(NULL, " ", &last)), line++) {
 
 		int i;
-		const struct stuff *temp;
+		const struct elem *temp;
 		char c=0;
 
 		/* Skip lines we shouldn't display */
@@ -95,7 +95,7 @@ out:
 
 		/* Set the answer of the dependant */
 		if (c) {
-			const struct stuff *temp;
+			const struct elem *temp;
 			int i;
 			for (temp = (line-1)->contents, i = 1; temp->alias; temp++, i++)
 				if (*(temp->alias) == c)
@@ -121,7 +121,7 @@ found:
 static unsigned int read_code(FILE *in)
 {
 	char data[1024];
-	struct stuff2 **cur_line = lines;
+	struct answer **cur_line = lines;
 
 	while (fgets(data, sizeof(data), in)) {
 		if (strcmp(data, "-----BEGIN GEEK CODE BLOCK-----\n"))
@@ -151,16 +151,16 @@ next_loop:
 /* Loop over lines, reading in answers from stdin */
 static void create_code(void)
 {
-	struct stuff2 **cur_line;
+	struct answer **cur_line;
 	int page_num=1;
 	for (cur_line = lines; *cur_line; cur_line++) {
-		struct stuff2 *cur_question;
+		struct answer *cur_question;
 		for (cur_question = *cur_line;
 				cur_question->answer;
 				cur_question++, page_num++) {
 			const char *aux_string=NULL;
 			if (cur_question->dependant) {
-				const struct stuff *aux = getcontent(cur_question-1);
+				const struct elem *aux = getcontent(cur_question-1);
 				if (!aux) {
 					perror(NULL);
 					exit(1);
@@ -176,17 +176,17 @@ static void create_code(void)
 
 static void output_code(FILE *out)
 {
-	struct stuff2 **cur_line;
+	struct answer **cur_line;
 
 	fputs("-----BEGIN GEEK CODE BLOCK-----\n", out);
 	fputs("Version: 3.12\n", out);
 
 	for (cur_line = lines; *cur_line; cur_line++) {
-		const struct stuff2 *cur_question;
+		const struct answer *cur_question;
 		for (cur_question = *cur_line;
 				cur_question->answer;
 				cur_question++) {
-			const struct stuff *content;
+			const struct elem *content;
 			if (!cur_question->display)
 				continue;
 			content = getcontent(cur_question);
@@ -196,7 +196,7 @@ static void output_code(FILE *out)
 				exit(1);
 			}
 			if (cur_question->dependant) {
-				const struct stuff *aux = getcontent(cur_question-1);
+				const struct elem *aux = getcontent(cur_question-1);
 				if (!aux) {
 					perror(NULL);
 					exit(1);
@@ -215,11 +215,11 @@ static void output_code(FILE *out)
 
 static void output_answers(FILE *out)
 {
-	struct stuff2 **cur_line;
+	struct answer **cur_line;
 	for (cur_line = lines; *cur_line; cur_line++) {
-		struct stuff2 *cur_question;
+		struct answer *cur_question;
 		for (cur_question = *cur_line; cur_question->answer; cur_question++) {
-			const struct stuff *content = getcontent(cur_question);
+			const struct elem *content = getcontent(cur_question);
 			if (!content) {
 				perror("There was an error getting an answer");
 				exit(1);

@@ -3,9 +3,9 @@
 
 #include "geekcode.h"
 
-const struct stuff *getcontent(const struct stuff2 *obj);
+const struct elem *getcontent(const struct answer *obj);
 int getanswer(const char *name, int page_num,
-		const struct stuff *objects,
+		const struct elem *objects,
 		const char *additional);
 
 #endif

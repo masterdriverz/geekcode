@@ -3,6 +3,6 @@
 
 #include "geekcode.h"
 
-extern struct stuff2 *lines[];
+extern struct answer *lines[];
 
 #endif

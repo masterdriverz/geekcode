@@ -58,7 +58,7 @@ static char *make_spaces(unsigned int amount)
 }
 
 int getanswer(const char *name, int page_num,
-		const struct stuff *objects,
+		const struct elem *objects,
 		const char *additional)
 {
 	int selection, line_count;
@@ -112,7 +112,7 @@ int getanswer(const char *name, int page_num,
 		return selection;
 }
 
-const struct stuff *getcontent(const struct stuff2 *obj)
+const struct elem *getcontent(const struct answer *obj)
 {
 	if (obj->answer <= 0)
 		return NULL;
