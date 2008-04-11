@@ -22,7 +22,7 @@ objs: force_look
 
 clean:
 	cd objs; $(MAKE) $(MFLAGS) clean
-	$(RM) -f $(TARGET) *.o
+	$(RM) -f $(TARGET) $(LIBFILES)
 
 geekcode: $(LIBFILES) objs
 	$(CC) $(LDFLAGS) -o $(TARGET) $(LIBFILES) objs/*.o
