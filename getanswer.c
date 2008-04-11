@@ -12,23 +12,12 @@
 
 #include "geekcode.h"
 #include "getanswer.h"
-#include "consoleio.h"
 
 #define eof_error() do {		\
 	fputs("\nGot EOF on stdin, aborting...\n", \
 		stderr);		\
 	exit(1);			\
 } while (0);
-
-/* Return the amount of character c's in s */
-static int count(const char *s, char c)
-{
-	int i=0;
-	for (; *s; s++)
-		if (*s == c)
-			i++;
-	return i;
-}
 
 static char *make_spaces(unsigned int amount)
 {
@@ -57,29 +46,31 @@ static char *make_spaces(unsigned int amount)
 	return s;
 }
 
+/*
+ * Empties keyboard input buffer until it reaches a newline.
+ * Returns 1 on EOF, 0 otherwise.
+ */
+static int clear_kb(void)
+{
+	int c;
+	while ((c = getchar()) != '\n')
+		if (c == EOF)
+			return 1;
+	return 0;
+}
+
 int getanswer(const char *name, int page_num,
 		const struct elem *objects,
 		const char *additional)
 {
-	int selection, line_count;
+	int selection, i;
 	char *spaces=make_spaces(66-strlen(name));
 
 	do {
-		int i, num_count=MAX_LINES, overflowed=0;
-		line_count = 0;
-		clearscreen();
-
 		printf("%s%sPage %2i of %i\n", name, spaces, page_num, PAGES);
 		puts("===============================================================================");
 		for (i=0; objects[i].comment; i++) {
 			const char *alias = objects[i].alias;
-			if (!num_count) {
-				printf("Press enter to continue");
-				if (clear_kb())
-					eof_error();
-				num_count = MAX_LINES;
-				overflowed = 1;
-			}
 			if (additional) {
 				char *s = malloc(strlen(objects[i].alias)+strlen(additional)+1);
 				if (!s) {
@@ -90,21 +81,16 @@ int getanswer(const char *name, int page_num,
 				alias = s;
 			}
 			printf("%2d %-5s %s\n", i+1, alias, objects[i].comment);
-			num_count -= count(objects[i].comment, '\n')+1;
 			if (additional)
 				free((void *)alias);
-			line_count++;
 		}
-		if (!overflowed)
-			while (num_count-- > 0)
-				putc('\n', stdout);
-		printf("Enter your %s code number here [0 to quit]: ", name);
+		printf("\nEnter your %s code number here [0 to quit]: ", name);
 		if (scanf("%d", &selection) == EOF)
 			eof_error();
 
 		if (clear_kb())
 			eof_error();
-	} while (selection < 0 || selection > line_count);
+	} while (selection < 0 || selection > i);
 
 	if (selection == 0)
 		exit(0);

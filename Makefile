@@ -4,7 +4,6 @@ PREFIX  = /usr/local
 BINDIR  = $(PREFIX)/bin
 
 LIBFILES = \
-	consoleio.o	\
 	getanswer.o	\
 	lines.o		\
 	debug.o		\
