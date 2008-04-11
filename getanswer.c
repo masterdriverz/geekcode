@@ -97,7 +97,7 @@ int getanswer(const char *name, int page_num,
 		}
 		if (!overflowed)
 			while (num_count-- > 0)
-				printf("\n");
+				putc('\n', stdout);
 		printf("Enter your %s code number here [0 to quit]: ", name);
 		if (scanf("%d", &selection) == EOF)
 			eof_error();
