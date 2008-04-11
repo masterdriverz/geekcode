@@ -331,8 +331,12 @@ int main(int argc, char **argv)
 			f = open_file(argv[index], "r");
 			if ((ret = read_code(f)) != 0) {
 				/* If 1, we've already output an error message */
-				if (ret == 2)
-					file_error(argv[index], "reading");
+				if (ret == 2) {
+					if (feof(f))
+						fputs("Unexpected EOF.\n", stderr);
+					else
+						file_error(argv[index], "reading");
+				}
 				return ret;
 			}
 			if (fclose(f))
