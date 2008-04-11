@@ -12,9 +12,10 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include "geekcode.h"
 #include "lines.h"
+#include "debug.h"
 #include "getanswer.h"
+#include "geekcode.h"
 
 
 #define not_geek(filename) do {			\
@@ -222,6 +223,7 @@ static void output_answers(FILE *out)
 			const struct elem *content = getcontent(cur_question);
 			if (!content) {
 				perror("There was an error getting an answer");
+				print_answer_struct(cur_question);
 				exit(1);
 			}
 			fprintf(out, "%s: %s\n",

@@ -7,6 +7,7 @@ LIBFILES = \
 	consoleio.o	\
 	getanswer.o	\
 	lines.o		\
+	debug.o		\
 	geekcode.o
 
 all: $(TARGET)
