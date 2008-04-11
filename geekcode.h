@@ -15,7 +15,7 @@
 #define str(x) _str(x)
 #define VERSIONSTR "Geekcode version v" str(VERSION)
 
-#define PAGES 36
+#define PAGES 37
 #define MAX_LINES 21
 
 struct elem {
