@@ -81,7 +81,7 @@ int getanswer(const char *name, int page_num,
 				overflowed = 1;
 			}
 			if (additional) {
-				char *s = malloc(strlen(s)+strlen(additional)+1);
+				char *s = malloc(strlen(objects[i].alias)+strlen(additional)+1);
 				if (!s) {
 					perror(NULL);
 					exit(-1);
