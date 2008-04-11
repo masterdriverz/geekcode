@@ -35,16 +35,25 @@
 
 
 enum line_errors {
-	TRAILING = 1, /* Trailing text in data */
+	SUCCESS = 0,
+	TRAILING, /* Trailing text in data */
 	M_ALIAS, /* Missing alias */
 	M_DEPENDANT, /* Missing dependant */
 };
+
+static const char *errors[] = {
+	"Success",
+	"Trailing text in data",
+	"Missing alias",
+	"Missing dependant",
+};
+
 
 /*
  * Parses the contents of data into line.
  * Returns 0 on success, error code on failure.
  */
-static unsigned int process_line(struct answer *line, char *data)
+static enum line_errors process_line(struct answer *line, char *data)
 {
 	char *last, *p;
 	for ((p = strtok_r(data, " ", &last)); p && line->answer;
@@ -111,7 +120,7 @@ found:
 	/* There's something left! */
 	if ((p && isalnum((unsigned char )*p)) || line->answer)
 		return TRAILING;
-	return 0;
+	return SUCCESS;
 }
 
 /*
@@ -136,10 +145,12 @@ static unsigned int read_code(FILE *in)
 	return 2;
 next_loop:
 	while (fgets(data, sizeof(data), in)) {
+		int ret;
 		if (!strcmp(data, "------END GEEK CODE BLOCK------\n"))
 			break;
-		if (process_line(*cur_line, data)) {
-			puts("There was an error reading a line");
+		if ((ret = process_line(*cur_line, data))) {
+			fprintf(stderr, "There was an error reading a line: %s\n",
+					errors[ret]);
 			return 1;
 		}
 		cur_line++;
