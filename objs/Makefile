@@ -1,6 +1,5 @@
 CFLAGS += -Wall -I../
 CC     ?= gcc
-PREFIX ?= /usr/local
 
 OBJFILES = \
 	appearance.o	\
