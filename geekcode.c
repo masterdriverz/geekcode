@@ -75,6 +75,7 @@ static enum line_errors process_line(struct answer *line, char *data)
 		 * line2 struct */
 		for (temp = line->contents, i=0; temp[i].alias; i++) {
 			char *n, buf[256];
+			const char *s;
 
 			/* Work out the dependant thing */
 			if (line->dependant) {
@@ -83,11 +84,9 @@ static enum line_errors process_line(struct answer *line, char *data)
 					snprintf(buf, sizeof(buf), temp[i].alias, c);
 				else
 					continue;
+				s = (const char *)&buf;
 			} else {
-				/* Ick. */
-				/* Just copy the string to buf if it's not dependant */
-				strncpy(buf, temp[i].alias, sizeof(buf)-1);
-				buf[sizeof(buf)-1] = '\0';
+				s = temp[i].alias;
 			}
 
 			/* Kill those pesky newlines */
@@ -95,7 +94,7 @@ static enum line_errors process_line(struct answer *line, char *data)
 			if (n)
 				*n = '\0';
 
-			if (!strcmp(buf, p))
+			if (!strcmp(s, p))
 				goto out;
 		}
 		return M_ALIAS;
