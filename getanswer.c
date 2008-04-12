@@ -44,12 +44,14 @@ int getanswer(const char *name, int page_num,
 		for (i=0; objects[i].comment; i++) {
 			const char *alias = objects[i].alias;
 			if (additional) {
-				char *s = malloc(strlen(objects[i].alias)+strlen(additional)+1);
+				/* The %c is replaced by a char and a NULL,
+				 * hence no +1 */
+				char *s = malloc(strlen(objects[i].alias));
 				if (!s) {
 					perror(NULL);
 					exit(-1);
 				}
-				sprintf(s, objects[i].alias, additional);
+				sprintf(s, objects[i].alias, *additional);
 				alias = s;
 			}
 			printf("%2d %-5s %s\n", i+1, alias, objects[i].comment);
