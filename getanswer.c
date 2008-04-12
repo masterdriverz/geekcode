@@ -27,7 +27,7 @@ static unsigned int print_page(const char *name, int page_num,
 		const char *additional)
 {
 	unsigned int i;
-	printf("\nPage %2i of %i: %s\n", page_num, PAGES, name);
+	printf("\nPage %i of %i: %s\n", page_num, PAGES, name);
 	puts("===============================================================================");
 	for (i = 0; objects[i].comment; i++) {
 		const char *alias = objects[i].alias;
