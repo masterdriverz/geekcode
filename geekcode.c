@@ -100,7 +100,7 @@ static enum line_errors process_line(struct answer *line, char *data)
 		return M_ALIAS;
 
 out:
-		line->answer = i;
+		line->answer = i+1;
 
 		/* Set the answer of the dependant */
 		if (c) {
