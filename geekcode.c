@@ -106,13 +106,13 @@ out:
 		if (c) {
 			const struct elem *temp;
 			int i;
-			for (temp = (line-1)->contents, i = 1; temp->alias; temp++, i++)
+			for (temp = (line-1)->contents, i = 0; temp->alias; temp++, i++)
 				if (*(temp->alias) == c)
 					goto found;
 			return M_DEPENDANT;
 
 found:
-			(line-1)->answer = i;
+			(line-1)->answer = i+1;
 		}
 	}
 
