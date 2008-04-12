@@ -37,7 +37,7 @@ static struct answer line1[] = {
 };
 
 static struct answer line2[] = {
-	INDEPENDANT(gc_os2, "OS2")
+	INDEPENDANT(gc_os2, "OS/2")
 	INDEPENDANT(gc_mac, "mac")
 	INDEPENDANT(gc_vms, "vms")
 	INDEPENDANT(gc_social, "social")
