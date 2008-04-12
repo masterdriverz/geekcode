@@ -130,9 +130,11 @@ found:
 static unsigned int read_code(FILE *in)
 {
 	char data[1024];
+	int line_count = 0;
 	struct answer **cur_line = lines;
 
 	while (fgets(data, sizeof(data), in)) {
+		line_count++;
 		if (strcmp(data, "-----BEGIN GEEK CODE BLOCK-----\n"))
 			continue;
 		/* Skip version line */
@@ -145,11 +147,12 @@ static unsigned int read_code(FILE *in)
 next_loop:
 	while (fgets(data, sizeof(data), in)) {
 		int ret;
+		line_count++;
 		if (!strcmp(data, "------END GEEK CODE BLOCK------\n"))
 			break;
 		if ((ret = process_line(*cur_line, data))) {
-			fprintf(stderr, "There was an error reading a line: %s\n",
-					errors[ret]);
+			fprintf(stderr, "There was an error reading line %d: %s\n",
+					line_count, errors[ret]);
 			return 1;
 		}
 		cur_line++;
