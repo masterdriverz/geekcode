@@ -245,9 +245,22 @@ static void output_answers(FILE *out)
 	}
 }
 
+static void list_sections(void)
+{
+	struct answer **cur_line;
+	for (cur_line = lines; *cur_line; cur_line++) {
+		struct answer *cur_question;
+		for (cur_question = *cur_line; cur_question->answer; cur_question++)
+			puts(cur_question->name);
+	}
+}
+
+
 static const char usage_str[] = "\
-./geekcode [ --read || --write [ --output=file ] || --version ] <file>\n\
+./geekcode [ --list || --read || --write [ --output=file ] || --version ] <file>\n\
 " VERSIONSTR "\n\n\
+  --list\n\
+     List the sections in geekcode.\n\
   --read\n\
      Translate a geekcode file (reads from stdin if no files given).\n\
   --write\n\
@@ -295,8 +308,9 @@ static FILE *open_file(const char *filename, const char *mode)
 int main(int argc, char **argv)
 {
 	char *outfile=NULL;
-	int read=0, write=0, output=0, c, index;
+	int read=0, write=0, output=0, list=0, c, index;
 	const struct option long_options[] = {
+		{"list",	no_argument,		NULL,	'l'},
 		{"read",	no_argument,		NULL,	'r'},
 		{"write",	no_argument,		NULL,	'w'},
 		{"output",	required_argument,	NULL,	'o'},
@@ -304,8 +318,11 @@ int main(int argc, char **argv)
 		{"version",	no_argument,		NULL,	'v'},
 		{NULL, 0, NULL, 0}
 	};
-	while ((c = getopt_long(argc, argv, "rwho:", long_options, &index)) != -1) {
+	while ((c = getopt_long(argc, argv, "lrwho:", long_options, &index)) != -1) {
 		switch (c) {
+		case 'l':
+			list = 1;
+			break;
 		case 'r':
 			read = 1;
 			break;
@@ -327,18 +344,20 @@ int main(int argc, char **argv)
 			return -1;
 		}
 	}
-	if (output && read) {
-		fputs("It only makes sense to use --output with --write.\n", stderr);
+	if (write+read+list > 1) {
+		fputs("Conflicting actions given simultaneously.\n", stderr);
 		usage(stderr);
 		return -1;
 	}
-	if (read) {
+	if (output && !write) {
+		fputs("It only makes sense to use --output with --write.\n", stderr);
+		usage(stderr);
+		return 1;
+	}
+	if (list) {
+		list_sections();
+	} else if (read) {
 		FILE *f=NULL;
-		if (write) {
-			fputs("Can't read and write a file at the same time.\n", stderr);
-			usage(stderr);
-			return -1;
-		}
 		for (index = optind; index < argc; index++) {
 			int ret;
 			f = open_file(argv[index], "r");
