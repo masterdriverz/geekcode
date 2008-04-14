@@ -224,7 +224,7 @@ static void output_code(FILE *out)
 		putc('\n', out);
 	}
 
-	fputs("\n------END GEEK CODE BLOCK------\n", out);
+	fputs("------END GEEK CODE BLOCK------\n", out);
 }
 
 static void output_answers(FILE *out)
