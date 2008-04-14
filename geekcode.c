@@ -286,13 +286,12 @@ static FILE *open_file(const char *filename, const char *mode)
 	FILE *f;
 
 	/* Check filename is the type of file we want */
-	/* XXX: This is icky */
-	if (mode[0] == 'r' && mode[1] == '\0') {
+	if (mode[0] == 'r') {
 		struct stat fileinfo;
 		if (stat(filename, &fileinfo) == -1)
 			file_error(filename, "checking");
 
-		if (S_ISREG(fileinfo.st_mode) != 1){
+		if (!S_ISREG(fileinfo.st_mode)) {
 			fprintf(stderr, "Error, file \"%s\" isn't a regular file\n",
 				filename);
 			exit(1);
