@@ -188,6 +188,7 @@ static void create_code(void)
 	}
 }
 
+/* Outputs the geekcode stored in lines to out */
 static void output_code(FILE *out)
 {
 	struct answer **cur_line;
@@ -281,6 +282,11 @@ static inline void version(void)
 	puts(version_str);
 }
 
+/*
+ * Opens filename with mode mode, checking it's a regular file if it's being
+ * opened for reading and checking the open succeeds. If either of these fails
+ * it exit(1)'s, never returning NULL.
+ */
 static FILE *open_file(const char *filename, const char *mode)
 {
 	FILE *f;
