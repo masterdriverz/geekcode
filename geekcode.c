@@ -373,7 +373,6 @@ int main(int argc, char **argv)
 			if (fclose(f))
 				file_error(argv[index], "closing");
 			output_answers(stdout);
-			putc('\n', stdout);
 		}
 		/* If we haven't opened anything, use stdin */
 		if (!f) {
