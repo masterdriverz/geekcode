@@ -16,7 +16,7 @@
 #define DEPENDANT(ident, name)		{-1, 1, name, ident, 1},
 #define LINE_END			{0,  0, NULL,  NULL, 0}
 
-static struct stuff2 line1[] = {
+static struct answer line1[] = {
 	INDEPENDANT(gc_type, "type")
 	INDEPENDANT(gc_dress, "dress")
 	INDEPENDANT(gc_height, "height")
@@ -36,8 +36,8 @@ static struct stuff2 line1[] = {
 	LINE_END
 };
 
-static struct stuff2 line2[] = {
-	INDEPENDANT(gc_os2, "OS2")
+static struct answer line2[] = {
+	INDEPENDANT(gc_os2, "OS/2")
 	INDEPENDANT(gc_mac, "mac")
 	INDEPENDANT(gc_vms, "vms")
 	INDEPENDANT(gc_social, "social")
@@ -55,7 +55,7 @@ static struct stuff2 line2[] = {
 	LINE_END
 };
 
-static struct stuff2 line3[] = {
+static struct answer line3[] = {
 	INDEPENDANT(gc_geekcode, "geekcode")
 	INDEPENDANT(gc_education, "education")
 	INDEPENDANT(gc_housing, "housing")
@@ -65,4 +65,4 @@ static struct stuff2 line3[] = {
 	LINE_END
 };
 
-struct stuff2 *lines[] = {line1, line2, line3, NULL};
+struct answer *lines[] = {line1, line2, line3, NULL};

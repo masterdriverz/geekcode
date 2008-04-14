@@ -1,6 +1,8 @@
 #ifndef _LINES_H
 #define _LINES_H
 
-extern struct stuff2 *lines[];
+#include "geekcode.h"
+
+extern struct answer *lines[];
 
 #endif

@@ -12,9 +12,10 @@
 #include <string.h>
 #include <sys/stat.h>
 
-#include "geekcode.h"
 #include "lines.h"
+#include "debug.h"
 #include "getanswer.h"
+#include "geekcode.h"
 
 
 #define not_geek(filename) do {			\
@@ -22,7 +23,7 @@
 "Error, file \"%s\" isn't geekcode\n",		\
 		filename);			\
 	exit(1);				\
-} while (0);
+} while (0)
 
 #define file_error(filename, action) do {	\
 	char error[256];			\
@@ -30,96 +31,129 @@
 "Error while %s file \"%s\"", action, filename);\
 	perror(error);				\
 	exit(1);				\
-} while (0);
+} while (0)
+
+
+enum line_errors {
+	SUCCESS = 0,
+	TRAILING, /* Trailing text in data */
+	M_ALIAS, /* Missing alias */
+	M_DEPENDANT, /* Missing dependant */
+};
+
+static const char *errors[] = {
+	"Success",
+	"Trailing text in data",
+	"Missing alias",
+	"Missing dependant",
+};
 
 
 /*
  * Parses the contents of data into line.
- * Returns 0 on success, -1 on failure, and sets errno appropriately.
+ * Returns 0 on success, error code on failure.
  */
-int process_line(struct stuff2 *line, char *data)
+static enum line_errors process_line(struct answer *line, char *data)
 {
 	char *last, *p;
 	for ((p = strtok_r(data, " ", &last)); p && line->answer;
 		(p = strtok_r(NULL, " ", &last)), line++) {
 
 		int i;
-		const struct stuff *temp;
+		const struct elem *temp;
 		char c=0;
 
+		/* Skip lines we shouldn't display */
 		while (!line->display)
 			line++;
 
+		/*
+		 * XXX: This whole section is ick. It copies strings A LOT,
+		 *      which it shouldn't.
+		 */
+		/* Parse each 'element' in the text, put the value in the
+		 * line2 struct */
 		for (temp = line->contents, i=0; temp[i].alias; i++) {
 			char *n, buf[256];
+			const char *s;
+
+			/* Work out the dependant thing */
 			if (line->dependant) {
 				if (sscanf(p, temp[i].alias, &c))
+					/* Ick. */
 					snprintf(buf, sizeof(buf), temp[i].alias, c);
 				else
 					continue;
+				s = (const char *)&buf;
 			} else {
-				strncpy(buf, temp[i].alias, sizeof(buf)-1);
-				buf[sizeof(buf)-1] = '\0';
+				s = temp[i].alias;
 			}
+
+			/* Kill those pesky newlines */
 			n = strchr(p, '\n');
 			if (n)
 				*n = '\0';
-			if (!strcmp(buf, p))
+
+			if (!strcmp(s, p))
 				goto out;
 		}
-		errno = EINVAL;
-		return -1;
+		return M_ALIAS;
+
 out:
-		line->answer = i;
+		line->answer = i+1;
+
+		/* Set the answer of the dependant */
 		if (c) {
-			const struct stuff *temp;
+			const struct elem *temp;
 			int i;
-			for (temp = (line-1)->contents, i = 1; temp->alias; temp++, i++)
+			for (temp = (line-1)->contents, i = 0; temp->alias; temp++, i++)
 				if (*(temp->alias) == c)
 					goto found;
-			errno = EINVAL;
-			return -1;
+			return M_DEPENDANT;
+
 found:
-			(line-1)->answer = i;
+			(line-1)->answer = i+1;
 		}
 	}
-	if ((p && isalnum((unsigned char )*p)) || line->answer) {
-		errno = EINVAL;
-		return -1;
-	}
-	return 0;
+
+	/* There's something left! */
+	if ((p && isalnum((unsigned char )*p)) || line->answer)
+		return TRAILING;
+	return SUCCESS;
 }
 
 /*
  * Reads geekcode from in and initialises the structures in lines
  * appropriately.
- * Returns 0 on success, -1 on failure.
+ * Returns 0 on success, 1 on parsing failure, 2 on file error.
  */
-int read_code(FILE *in)
+static unsigned int read_code(FILE *in)
 {
 	char data[1024];
-	struct stuff2 **cur_line = lines;
+	int line_count = 0;
+	struct answer **cur_line = lines;
 
 	while (fgets(data, sizeof(data), in)) {
+		line_count++;
 		if (strcmp(data, "-----BEGIN GEEK CODE BLOCK-----\n"))
 			continue;
 		/* Skip version line */
 		if (!fgets(data, sizeof(data), in))
-			return -1;
+			return 2;
 		goto next_loop;
 	}
-	/*
-	 * We didn't skip this, so fgets failed before we reached the start of
-	 * a GEEK CODE block.
-	 * */
-	return -1;
+	/* fgets failed */
+	return 2;
 next_loop:
 	while (fgets(data, sizeof(data), in)) {
+		int ret;
+		line_count++;
 		if (!strcmp(data, "------END GEEK CODE BLOCK------\n"))
 			break;
-		if (process_line(*cur_line, data)) {
-			perror("There was an error reading a line");
-			exit(1);
+		if ((ret = process_line(*cur_line, data))) {
+			fprintf(stderr, "There was an error reading line %d: %s\n",
+					line_count, errors[ret]);
+			return 1;
 		}
 		cur_line++;
 		if (!*cur_line)
@@ -128,18 +162,19 @@ next_loop:
 	return 0;
 }
 
-void create_code(void)
+/* Loop over lines, reading in answers from stdin */
+static void create_code(void)
 {
-	struct stuff2 **cur_line;
+	struct answer **cur_line;
 	int page_num=1;
 	for (cur_line = lines; *cur_line; cur_line++) {
-		struct stuff2 *cur_question;
+		struct answer *cur_question;
 		for (cur_question = *cur_line;
 				cur_question->answer;
 				cur_question++, page_num++) {
 			const char *aux_string=NULL;
 			if (cur_question->dependant) {
-				const struct stuff *aux = getcontent(cur_question-1);
+				const struct elem *aux = getcontent(cur_question-1);
 				if (!aux) {
 					perror(NULL);
 					exit(1);
@@ -153,19 +188,19 @@ void create_code(void)
 	}
 }
 
-void output_code(FILE *out)
+static void output_code(FILE *out)
 {
-	struct stuff2 **cur_line;
+	struct answer **cur_line;
 
 	fputs("-----BEGIN GEEK CODE BLOCK-----\n", out);
 	fputs("Version: 3.12\n", out);
 
 	for (cur_line = lines; *cur_line; cur_line++) {
-		const struct stuff2 *cur_question;
+		const struct answer *cur_question;
 		for (cur_question = *cur_line;
 				cur_question->answer;
 				cur_question++) {
-			const struct stuff *content;
+			const struct elem *content;
 			if (!cur_question->display)
 				continue;
 			content = getcontent(cur_question);
@@ -175,7 +210,7 @@ void output_code(FILE *out)
 				exit(1);
 			}
 			if (cur_question->dependant) {
-				const struct stuff *aux = getcontent(cur_question-1);
+				const struct elem *aux = getcontent(cur_question-1);
 				if (!aux) {
 					perror(NULL);
 					exit(1);
@@ -189,18 +224,19 @@ void output_code(FILE *out)
 		putc('\n', out);
 	}
 
-	fputs("\n------END GEEK CODE BLOCK------\n", out);
+	fputs("------END GEEK CODE BLOCK------\n", out);
 }
 
-void output_answers(FILE *out)
+static void output_answers(FILE *out)
 {
-	struct stuff2 **cur_line;
+	struct answer **cur_line;
 	for (cur_line = lines; *cur_line; cur_line++) {
-		struct stuff2 *cur_question;
+		struct answer *cur_question;
 		for (cur_question = *cur_line; cur_question->answer; cur_question++) {
-			const struct stuff *content = getcontent(cur_question);
+			const struct elem *content = getcontent(cur_question);
 			if (!content) {
 				perror("There was an error getting an answer");
+				print_answer_struct(cur_question);
 				exit(1);
 			}
 			fprintf(out, "%s: %s\n",
@@ -209,7 +245,7 @@ void output_answers(FILE *out)
 	}
 }
 
-const char usage_str[] = "\
+static const char usage_str[] = "\
 ./geekcode [ --read || --write [ --output=file ] || --version ] <file>\n\
 " VERSIONSTR "\n\n\
   --read\n\
@@ -218,31 +254,36 @@ const char usage_str[] = "\
      Interactively input a geekcode (default).\n\
   --output <file>\n\
      (Only applicable with --write.)\n\
-     Write the final geekcode to file (but still write the questions to stdout).\
+     Write the final geekcode to file (but still write the questions to stdout).\n\
 ";
-const char version_str[] = VERSIONSTR;
+static const char version_str[] = VERSIONSTR;
 
-inline void usage(FILE *out)
+static inline void usage(FILE *out)
 {
 	fputs(usage_str, out);
 }
 
-inline void version(void)
+static inline void version(void)
 {
 	puts(version_str);
 }
 
-FILE *open_file(const char *filename, const char *mode)
+static FILE *open_file(const char *filename, const char *mode)
 {
 	FILE *f;
-	struct stat fileinfo;
-	if (stat(filename, &fileinfo) == -1)
-		file_error(filename, "checking");
 
-	if (S_ISREG(fileinfo.st_mode) != 1){
-		fprintf(stderr, "Error, file \"%s\" isn't a regular file\n",
-			filename);
-		exit(1);
+	/* Check filename is the type of file we want */
+	/* XXX: This is icky */
+	if (mode[0] == 'r' && mode[1] == '\0') {
+		struct stat fileinfo;
+		if (stat(filename, &fileinfo) == -1)
+			file_error(filename, "checking");
+
+		if (S_ISREG(fileinfo.st_mode) != 1){
+			fprintf(stderr, "Error, file \"%s\" isn't a regular file\n",
+				filename);
+			exit(1);
+		}
 	}
 
 	f = fopen(filename, mode);
@@ -299,8 +340,18 @@ int main(int argc, char **argv)
 			return -1;
 		}
 		for (index = optind; index < argc; index++) {
+			int ret;
 			f = open_file(argv[index], "r");
-			read_code(f);
+			if ((ret = read_code(f)) != 0) {
+				/* If 1, we've already output an error message */
+				if (ret == 2) {
+					if (feof(f))
+						fputs("Unexpected EOF.\n", stderr);
+					else
+						file_error(argv[index], "reading");
+				}
+				return ret;
+			}
 			if (fclose(f))
 				file_error(argv[index], "closing");
 			output_answers(stdout);

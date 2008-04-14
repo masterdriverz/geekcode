@@ -54,7 +54,7 @@
 
 { gc_perl:
 	{"P+++++",	"I am Larry Wall, Tom Christiansen, or Randal Schwartz."}
-	{"P++++",	"I don't write Perl, I speak it. Perl has superseded all other\n"
+	{"P++++",	"I don't write Perl, I speak it. Perl has superceeded all other\n"
 			"          programming languages. I firmly believe that all programs can be\n"
 			"          reduced to a Perl one-liner. I use Perl to achieve U+++ status."}
 	{"P+++",	"Perl is a very powerful programming tool. Not only do I no longer\n"
@@ -202,13 +202,13 @@
 	{"O-",	"Tried it, didn't like it."}
 	{"O--",	"I can't even get the thing to install!"}
 	{"O---",	"Windows RULES! Long live Bill Gates. (See w++++)"}
-	{"O----",	"I am Bill Gates of Borg. Os/2 is irrelevant."}
+	{"O----",	"I am Bill Gates of Borg. OS/2 is irrelevant."}
 }
 
 { gc_mac:
 	{"M++",	"I am a Mac guru. Anything those DOS putzes and Unix nerds can do, I can\n"
 			"      do better, and if not, I'll write the damn software to do it."}
-	{"M+",	"A Mac has it's uses and I use it quite often."}
+	{"M+",	"A Mac has its uses and I use it quite often."}
 	{"M",	"I use a Mac, but I'm pretty indifferent about it."}
 	{"M-",	"Macs suck. All real geeks have a character prompt."}
 	{"M--",	"Macs do more than suck. They make a user stupid by allowing them to use\n"

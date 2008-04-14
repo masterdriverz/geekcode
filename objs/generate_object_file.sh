@@ -40,7 +40,7 @@ file_header() {
 object_file() {
 	file_header $INCLUDES
 
-	sed -e 's/{ \(\w*\):/const struct stuff \1[] = {/' \
+	sed -e 's/{ \(\w*\):/const struct elem \1[] = {/' \
 		-e 's/^}/\tSENTINEL\n};/' \
 		-e 's/"}/"},/' $1
 }
@@ -54,7 +54,7 @@ header_file() {
 		echo -e "#ifndef _${HEADER}_H\n#define _${HEADER}_H\n"
 	fi
 
-	sed -e 's/{ \(\w*\):/extern const struct stuff \1[];/' -e '/\t/d' -e '/}/d' $1
+	sed -e 's/{ \(\w*\):/extern const struct elem \1[];/' -e '/\t/d' -e '/}/d' $1
 	if [[ -n HEADER ]]; then
 		echo -e "\n#endif /* _${HEADER}_H */"
 	fi

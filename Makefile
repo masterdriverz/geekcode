@@ -4,9 +4,9 @@ PREFIX  = /usr/local
 BINDIR  = $(PREFIX)/bin
 
 LIBFILES = \
-	consoleio.o	\
 	getanswer.o	\
 	lines.o		\
+	debug.o		\
 	geekcode.o
 
 all: $(TARGET)
@@ -19,9 +19,13 @@ lines.o: lines.c geekcode.h objs
 objs: force_look
 	cd objs; $(MAKE) $(MFLAGS)
 
-clean:
+clean_obj:
 	cd objs; $(MAKE) $(MFLAGS) clean
-	$(RM) -f $(TARGET) *.o
+
+clean_src:
+	$(RM) -f $(TARGET) $(LIBFILES)
+
+clean: clean_src clean_obj
 
 geekcode: $(LIBFILES) objs
 	$(CC) $(LDFLAGS) -o $(TARGET) $(LIBFILES) objs/*.o
