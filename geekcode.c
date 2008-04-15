@@ -353,6 +353,8 @@ int main(int argc, char **argv)
 		fputs("Conflicting actions given simultaneously.\n", stderr);
 		usage(stderr);
 		return -1;
+	} else if (!write+read+list) {
+		write = 1;
 	}
 	if (output && !write) {
 		fputs("It only makes sense to use --output with --write.\n", stderr);
