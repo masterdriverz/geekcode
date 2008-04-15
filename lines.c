@@ -11,10 +11,10 @@
 #include "objs/politics.h"
 #include "objs/type.h"
 
-#define HIDDEN(ident, name)		{-1, 0, name, ident, 0},
-#define INDEPENDANT(ident, name)	{-1, 1, name, ident, 0},
-#define DEPENDANT(ident, name)		{-1, 1, name, ident, 1},
-#define LINE_END			{0,  0, NULL,  NULL, 0}
+#define HIDDEN(ident, name)		{-1, 0, 0, name, ident},
+#define INDEPENDANT(ident, name)	{-1, 1, 0, name, ident},
+#define DEPENDANT(ident, name)		{-1, 1, 1, name, ident},
+#define LINE_END			{0,  0, 0, NULL,  NULL}
 
 static struct answer line1[] = {
 	INDEPENDANT(gc_type, "type")

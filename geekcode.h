@@ -23,10 +23,9 @@ struct elem {
 };
 
 struct answer {
-	int answer, display;
+	int answer, display, dependant;
 	const char *name;
 	const struct elem *contents;
-	int dependant;
 };
 
 #define SENTINEL {NULL, NULL}
