@@ -206,14 +206,17 @@ static void output_code(FILE *out)
 				continue;
 			content = getcontent(cur_question);
 			if (!content) {
-				fprintf(stderr, "\n%s\n", cur_question->name);
-				perror("There was an error getting an alias");
+				fprintf(stderr, "\nThere was an error getting an alias (%s) "
+						"(obj->answer == %d)\n",
+					cur_question->name);
 				exit(1);
 			}
 			if (cur_question->dependant) {
 				const struct elem *aux = getcontent(cur_question-1);
 				if (!aux) {
-					perror(NULL);
+					fprintf(stderr, "There was an error getting content "
+							"(obj->answer == %d)\n",
+						(cur_question-1)->answer);
 					exit(1);
 				}
 				fprintf(out, content->alias, *aux->alias);
