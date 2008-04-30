@@ -24,10 +24,9 @@ Execute `make` to build geekcode, and `make install` to install it.
 Windows Notes
 -------------
 Originally, this built (and presumably ran) on Windows. I do not use Windows,
-and have no access to any development tools on it. I've kept the only
-compatibility parts (in consoleio.c), in the hope it makes Geekcode work on
-Windows, but frankly, I have no interest in pursuing the matter any further.
-Any patches improving Windows support will be received gladly.
+and have no access to any development tools on it. I hope Geekcode still works
+on Windows, but frankly, I have no interest in pursuing the matter any
+further.  Any patches improving Windows support will be received gladly.
 
 License
 -------
