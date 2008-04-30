@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/stat.h>
+#include <stdarg.h>
 
 #include "lines.h"
 #include "debug.h"
@@ -48,6 +49,20 @@ static const char *errors[] = {
 	"Missing dependant",
 };
 
+static const struct elem *xgetcontent(const struct answer *obj,
+		const char *format, ...)
+{
+	const struct elem *content;
+	va_list ap;
+	va_start(ap, format);
+	content = getcontent(obj);
+	if (!content) {
+		vfprintf(stderr, format, ap);
+		print_answer_struct(obj);
+		exit(1);
+	}
+	return content;
+}
 
 /*
  * Parses the contents of data into line.
@@ -140,6 +155,7 @@ static unsigned int read_code(FILE *in)
 		/* Skip version line */
 		if (!fgets(data, sizeof(data), in))
 			return 2;
+		puts(data);
 		goto next_loop;
 	}
 	/* fgets failed */
@@ -174,11 +190,8 @@ static void create_code(void)
 				cur_question++, page_num++) {
 			const char *aux_string=NULL;
 			if (cur_question->dependant) {
-				const struct elem *aux = getcontent(cur_question-1);
-				if (!aux) {
-					perror(NULL);
-					exit(1);
-				}
+				const struct elem *aux = xgetcontent(cur_question-1,
+					"function: %s; line %d", __func__, __LINE__);
 				aux_string = aux->alias;
 			}
 			cur_question->answer =
@@ -204,21 +217,12 @@ static void output_code(FILE *out)
 			const struct elem *content;
 			if (!cur_question->display)
 				continue;
-			content = getcontent(cur_question);
-			if (!content) {
-				fprintf(stderr, "\nThere was an error getting an alias (%s) "
-						"(obj->answer == %d)\n",
-					cur_question->name);
-				exit(1);
-			}
+			content = xgetcontent(cur_question,
+				"\nThere was an error getting an alias (%s)\n",
+				cur_question->name);
 			if (cur_question->dependant) {
-				const struct elem *aux = getcontent(cur_question-1);
-				if (!aux) {
-					fprintf(stderr, "There was an error getting content "
-							"(obj->answer == %d)\n",
-						(cur_question-1)->answer);
-					exit(1);
-				}
+				const struct elem *aux =
+					xgetcontent(cur_question-1, "There was an error getting content\n");
 				fprintf(out, content->alias, *aux->alias);
 			} else {
 				fputs(content->alias, out);
@@ -237,12 +241,8 @@ static void output_answers(FILE *out)
 	for (cur_line = lines; *cur_line; cur_line++) {
 		struct answer *cur_question;
 		for (cur_question = *cur_line; cur_question->answer; cur_question++) {
-			const struct elem *content = getcontent(cur_question);
-			if (!content) {
-				perror("There was an error getting an answer");
-				print_answer_struct(cur_question);
-				exit(1);
-			}
+			const struct elem *content =
+				xgetcontent(cur_question, "There was an error getting an answer");
 			fprintf(out, "%s: %s\n",
 				cur_question->name, content->comment);
 		}
