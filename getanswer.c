@@ -104,11 +104,3 @@ foo:
 
 	return (int)val;
 }
-
-const struct elem *getcontent(const struct answer *obj)
-{
-	if (obj->answer <= 0)
-		return NULL;
-
-	return &obj->contents[obj->answer-1];
-}
