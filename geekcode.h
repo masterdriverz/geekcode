@@ -15,6 +15,8 @@
 #define str(x) _str(x)
 #define VERSIONSTR "Geekcode version v" str(VERSION)
 
+#define _printf(a, b) __attribute__((format(printf, a, b)))
+
 #define PAGES 37
 #define MAX_LINES 21
 

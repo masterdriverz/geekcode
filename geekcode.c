@@ -49,6 +49,11 @@ static const char *errors[] = {
 	"Missing dependant",
 };
 
+/*
+ * Wrapper around getcontent, exiting on failure and printing a useful
+ * message. If format is non-NULL, uses printf format semantics.
+ */
+_printf(2, 3)
 static const struct elem *xgetcontent(const struct answer *obj,
 		const char *format, ...)
 {
@@ -57,7 +62,10 @@ static const struct elem *xgetcontent(const struct answer *obj,
 	va_start(ap, format);
 	content = getcontent(obj);
 	if (!content) {
-		vfprintf(stderr, format, ap);
+		if (format)
+			vfprintf(stderr, format, ap);
+		else
+			fputs("Error getting content\n", stderr);
 		print_answer_struct(obj);
 		exit(1);
 	}
