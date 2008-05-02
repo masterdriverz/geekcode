@@ -19,20 +19,14 @@
 #include "geekcode.h"
 
 
-#define not_geek(filename) do {			\
-	fprintf(stderr,				\
-"Error, file \"%s\" isn't geekcode\n",		\
-		filename);			\
-	exit(1);				\
-} while (0)
-
-#define file_error(filename, action) do {	\
-	char error[256];			\
-	snprintf(error, sizeof(error),		\
-"Error while %s file \"%s\"", action, filename);\
-	perror(error);				\
-	exit(1);				\
-} while (0)
+static void file_error(const char *filename, const char *action)
+{
+	char error[256];
+	snprintf(error, sizeof(error), "Error while %s file \"%s\"",
+		action, filename);
+	perror(error);
+	exit(1);
+}
 
 
 enum line_errors {
