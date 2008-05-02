@@ -192,7 +192,7 @@ static void create_code(void)
 			const char *aux_string=NULL;
 			if (cur_question->dependant) {
 				const struct elem *aux = xgetcontent(cur_question-1,
-					"function: %s; line %d", __func__, __LINE__);
+					"function: %s; line %d\n", __func__, __LINE__);
 				aux_string = aux->alias;
 			}
 			cur_question->answer =
@@ -243,7 +243,7 @@ static void output_answers(FILE *out)
 		struct answer *cur_question;
 		for (cur_question = *cur_line; cur_question->answer; cur_question++) {
 			const struct elem *content =
-				xgetcontent(cur_question, "There was an error getting an answer");
+				xgetcontent(cur_question, "There was an error getting an answer\n");
 			fprintf(out, "%s: %s\n",
 				cur_question->name, content->comment);
 		}
