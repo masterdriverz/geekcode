@@ -157,7 +157,6 @@ static unsigned int read_code(FILE *in)
 		/* Skip version line */
 		if (!fgets(data, sizeof(data), in))
 			return 2;
-		puts(data);
 		goto next_loop;
 	}
 	/* fgets failed */
