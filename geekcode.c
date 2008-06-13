@@ -154,8 +154,10 @@ static unsigned int read_code(FILE *in)
 		if (strcmp(data, "-----BEGIN GEEK CODE BLOCK-----\n"))
 			continue;
 		/* Skip version line */
+		/* XXX: Check version some way? */
 		if (!fgets(data, sizeof(data), in))
 			return 2;
+		line_count++;
 		goto next_loop;
 	}
 	/* fgets failed */
