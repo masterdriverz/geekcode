@@ -84,20 +84,19 @@ static enum line_errors process_line(struct answer *line, char *data)
 		while (!line->display)
 			line++;
 
-		/*
-		 * XXX: This whole section is ick. It copies strings A LOT,
-		 *      which it shouldn't.
-		 */
 		/* Parse each 'element' in the text, put the value in the
-		 * line2 struct */
+		 * answer struct */
 		for (temp = line->contents, i=0; temp[i].alias; i++) {
 			char *n, buf[256];
 			const char *s;
 
-			/* Work out the dependant thing */
+			/*
+			 * If the line is dependant, iterate over the possible
+			 * aliases it could be. If it's not, this loop will
+			 * only be entered once.
+			 */
 			if (line->dependant) {
 				if (sscanf(p, temp[i].alias, &c))
-					/* Ick. */
 					snprintf(buf, sizeof(buf), temp[i].alias, c);
 				else
 					continue;
