@@ -19,6 +19,7 @@
 #include "geekcode.h"
 
 
+static void output_answers(FILE *out);
 static void file_error(const char *filename, const char *action)
 {
 	char error[256];
@@ -31,9 +32,12 @@ static void file_error(const char *filename, const char *action)
 
 enum line_errors {
 	SUCCESS = 0,
-	TRAILING, /* Trailing text in data */
-	M_ALIAS, /* Missing alias */
-	M_DEPENDANT, /* Missing dependant */
+	ETRAILING,
+	EALIAS,
+	EDEPENDANT,
+	ESYNTAX,
+	EEOF,
+	EFERROR,
 };
 
 static const char *errors[] = {
@@ -41,6 +45,9 @@ static const char *errors[] = {
 	"Trailing text in data",
 	"Missing alias",
 	"Missing dependant",
+	"Syntax error",
+	"Unexpected EOF",
+	"File error",
 };
 
 /*
@@ -113,7 +120,7 @@ static enum line_errors process_line(struct answer *line, char *data)
 			if (!strcmp(s, p))
 				goto out;
 		}
-		return M_ALIAS;
+		return EALIAS;
 
 out:
 		line->answer = i+1;
@@ -125,7 +132,7 @@ out:
 			for (temp = (line-1)->contents, i = 0; temp->alias; temp++, i++)
 				if (*(temp->alias) == c)
 					goto found;
-			return M_DEPENDANT;
+			return EDEPENDANT;
 
 found:
 			(line-1)->answer = i+1;
@@ -134,50 +141,80 @@ found:
 
 	/* There's something left! */
 	if ((p && isalnum((unsigned char )*p)) || line->answer)
-		return TRAILING;
+		return ETRAILING;
 	return SUCCESS;
 }
 
 /*
  * Reads geekcode from in and initialises the structures in lines
  * appropriately.
- * Returns 0 on success, 1 on parsing failure, 2 on file error.
+ * Returns 0 on success, error code on failure.
  */
-static unsigned int read_code(FILE *in)
+static int parse_header(FILE *in, unsigned *line_count)
 {
 	char data[1024];
-	int line_count = 0;
-	struct answer **cur_line = lines;
 
+	*line_count = 0;
 	while (fgets(data, sizeof(data), in)) {
-		line_count++;
+		(*line_count)++;
 		if (strcmp(data, "-----BEGIN GEEK CODE BLOCK-----\n"))
 			continue;
 		/* Skip version line */
 		/* XXX: Check version some way? */
 		if (!fgets(data, sizeof(data), in))
-			return 2;
-		line_count++;
-		goto next_loop;
+			return -1;
+		(*line_count)++;
+		return 0;
 	}
-	/* fgets failed */
-	return 2;
-next_loop:
+	return -1;
+}
+
+static int parse_code(FILE *in, unsigned *line_count)
+{
+	char data[1024];
+	struct answer **cur_line = lines;
+
 	while (fgets(data, sizeof(data), in)) {
 		int ret;
-		line_count++;
+		(*line_count)++;
 		if (!strcmp(data, "------END GEEK CODE BLOCK------\n"))
-			break;
-		if ((ret = process_line(*cur_line, data))) {
-			fprintf(stderr, "There was an error reading line %d: %s\n",
-					line_count, errors[ret]);
-			return 1;
-		}
-		cur_line++;
+			return 0;
 		if (!*cur_line)
-			break;
+			return ESYNTAX;
+		if ((ret = process_line(*cur_line, data)))
+			return ret;
+		cur_line++;
 	}
-	return 0;
+	return -1;
+}
+
+static unsigned int read_code(FILE *in, unsigned *line_count)
+{
+	int ret;
+
+	ret = parse_header(in, line_count);
+	if (!ret)
+		ret = parse_code(in, line_count);
+	if (!ret)
+		return 0;
+	if (ret < 0) {
+		if (ferror(in))
+			return EFERROR;
+		else
+			return EEOF;
+	}
+	return ret;
+}
+
+static void run_code(const char *filename, FILE *in)
+{
+	unsigned ret, line_count;
+	ret = read_code(in, &line_count);
+	if (ret) {
+		fprintf(stderr, "Error '%s' in file %s, line %u\n", errors[ret], filename, line_count);
+		exit(1);
+	}
+	output_answers(stdout);
 }
 
 /* Loop over lines, reading in answers from stdin */
@@ -371,27 +408,14 @@ int main(int argc, char **argv)
 	} else if (read) {
 		FILE *f=NULL;
 		for (index = optind; index < argc; index++) {
-			int ret;
 			f = open_file(argv[index], "r");
-			if ((ret = read_code(f)) != 0) {
-				/* If 1, we've already output an error message */
-				if (ret == 2) {
-					if (feof(f))
-						fputs("Unexpected EOF.\n", stderr);
-					else
-						file_error(argv[index], "reading");
-				}
-				return ret;
-			}
+			run_code(argv[index], f);
 			if (fclose(f))
 				file_error(argv[index], "closing");
-			output_answers(stdout);
 		}
 		/* If we haven't opened anything, use stdin */
-		if (!f) {
-			read_code(stdin);
-			output_answers(stdout);
-		}
+		if (!f)
+			run_code("stdin", stdin);
 	} else {
 		FILE *f;
 		if (outfile)
