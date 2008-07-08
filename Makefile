@@ -4,9 +4,10 @@ PREFIX  = /usr/local
 BINDIR  = $(PREFIX)/bin
 
 LIBFILES = \
+	debug.o		\
 	getanswer.o	\
 	lines.o		\
-	debug.o		\
+	parse.o		\
 	geekcode.o
 
 all: $(TARGET)
