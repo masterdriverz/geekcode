@@ -8,5 +8,5 @@ enum parse_errors_t {
 	EFERROR,
 };
 
-const char *parse_errors[];
+extern const char *parse_errors[];
 unsigned read_code(FILE *in, unsigned *line_count);
